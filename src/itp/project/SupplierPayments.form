@@ -52,7 +52,7 @@
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -109,7 +109,7 @@
                           <Component id="jComboBox1" pref="204" max="32767" attributes="0"/>
                           <Component id="jTextField7" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
                           <Component id="jTextField6" max="32767" attributes="0"/>
                           <Component id="jDateChooser1" pref="204" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
