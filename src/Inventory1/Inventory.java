@@ -167,6 +167,17 @@ public class Inventory extends javax.swing.JFrame {
         );
 
         jPanel8.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel8MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel8MouseExited(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -312,6 +323,24 @@ public class Inventory extends javax.swing.JFrame {
         r1.setVisible(true);
         
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+        // TODO add your handling code here:
+         jPanel8.setBackground(new Color(255,51,51));
+         Orders o1 = new Orders();
+        o1.setVisible(true);
+    }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
+        // TODO add your handling code here:
+           jPanel8.setBackground(new Color(255,51,51));
+    }//GEN-LAST:event_jPanel8MouseEntered
+
+    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
+        // TODO add your handling code here:
+         jPanel8.setBackground(new Color(153,153,153));
+        
+    }//GEN-LAST:event_jPanel8MouseExited
 
     /**
      * @param args the command line arguments
