@@ -310,14 +310,18 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Fabrics"/>
-                    <StringItem index="1" value="Buttons"/>
-                    <StringItem index="2" value="Elastics"/>
-                    <StringItem index="3" value="Zipper"/>
+                  <StringArray count="5">
+                    <StringItem index="0" value="Select"/>
+                    <StringItem index="1" value="Fabrics"/>
+                    <StringItem index="2" value="Buttons"/>
+                    <StringItem index="3" value="Elastics"/>
+                    <StringItem index="4" value="Zipper"/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox1ItemStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
@@ -328,13 +332,7 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Shirt Fabric"/>
-                    <StringItem index="1" value="Trouser Fabric"/>
-                    <StringItem index="2" value="Brief Fabric"/>
-                    <StringItem index="3" value="2 Hole Button"/>
-                    <StringItem index="4" value="4 Hole Button"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
             </Component>
