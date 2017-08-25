@@ -318,17 +318,17 @@ public class Inventory extends javax.swing.JFrame {
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
-         jPanel3.setBackground(new Color(255,51,51));
-         RawMaterials r1 = new RawMaterials();
-        r1.setVisible(true);
+            jPanel3.setBackground(new Color(255,51,51));
+            RawMaterials r1 = new RawMaterials();
+            r1.setVisible(true);
         
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         // TODO add your handling code here:
-         jPanel8.setBackground(new Color(255,51,51));
-         Orders o1 = new Orders();
-        o1.setVisible(true);
+            jPanel8.setBackground(new Color(255,51,51));
+            Orders o1 = new Orders();
+            o1.setVisible(true);
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered

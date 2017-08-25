@@ -222,10 +222,8 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Formal Shirt"/>
-                    <StringItem index="1" value="Formal Trouser"/>
-                    <StringItem index="2" value="Brief"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value=""/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -239,13 +237,8 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
-                    <StringItem index="0" value="Classic Fit"/>
-                    <StringItem index="1" value="Slim Fit"/>
-                    <StringItem index="2" value="Pleated Trouser"/>
-                    <StringItem index="3" value="Flat Front Trouser"/>
-                    <StringItem index="4" value="Normal Brief"/>
-                    <StringItem index="5" value="Boxer Brief"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value=""/>
                   </StringArray>
                 </Property>
               </Properties>

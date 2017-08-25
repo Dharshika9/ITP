@@ -5,19 +5,62 @@
  */
 package Inventory1;
 
+import dbConnect.dbcon;
+import dbConnect.dbcon;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.activation.CommandInfo;
+import javax.swing.JOptionPane;
+import sun.tools.jar.CommandLine;
+
 /**
  *
  * @author Dharshika
  */
 public class Products extends javax.swing.JFrame {
-
+    Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement pst1 = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    private PreparedStatement ps;
+    private ResultSet res;
     /**
      * Creates new form Products
      */
     public Products() {
         initComponents();
+        con= dbcon.connect();
+        fillcombo();
+        
     }
 
+    public void fillcombo(){
+        String sql="Select * from product_category";
+        try {
+            ps=con.prepareStatement(sql);
+            res=ps.executeQuery();
+            while(res.next())
+            {
+                
+                jComboBox1.addItem(String.valueOf(res.getInt("product_category_id"))+"."+(res.getString("product_category_name")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,11 +120,11 @@ public class Products extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(153, 153, 153));
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Formal Shirt", "Formal Trouser", "Brief" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         jComboBox2.setBackground(new java.awt.Color(153, 153, 153));
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Classic Fit", "Slim Fit", "Pleated Trouser", "Flat Front Trouser", "Normal Brief", "Boxer Brief" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
 
         jComboBox3.setBackground(new java.awt.Color(153, 153, 153));
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
