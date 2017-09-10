@@ -19,7 +19,7 @@ public class dbcon {
         try{
             
             Class.forName("com.mysql.jdbc.Driver");
-            conn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ITP", "Dharshika", "indumathi9@");
+            conn = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/itp", "Dharshika", "indumathi9@");
             
         }
         catch (Exception e) {
