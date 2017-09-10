@@ -5,7 +5,7 @@ package Inventory1;
  *
  * @author Dharshika
  */
-public class InventoryModel {
+public class RawmaterialsModel {
     private int code;
     private String category;
     private String subcategory;
@@ -19,7 +19,7 @@ public class InventoryModel {
     private String orderstatus;
     
     
-    public InventoryModel(int Code, String Category, String Subcategory, String Name, String Color, String Unitmeasure, double Startinv, double Reorder, double Cost, double Stockqty, String Orderstatus)
+    public RawmaterialsModel(int Code, String Category, String Subcategory, String Name, String Color, String Unitmeasure, double Startinv, double Reorder, double Cost, double Stockqty, String Orderstatus)
     {
         this.code=Code;
         this.category=Category;

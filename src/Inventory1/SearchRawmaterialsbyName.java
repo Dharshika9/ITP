@@ -27,9 +27,9 @@ public class SearchRawmaterialsbyName extends javax.swing.JFrame {
         initComponents();
     }
 
-    public ArrayList<InventoryModel> getInventoryList()
+    public ArrayList<RawmaterialsModel> getInventoryList()
     {
-        ArrayList<InventoryModel> inventoryList=new ArrayList<>();
+        ArrayList<RawmaterialsModel> inventoryList=new ArrayList<>();
         Connection connection = connect();
         String query="Select * from rawmaterials WHERE name LIKE '%"+txt_search.getText()+"%'";
         
@@ -39,11 +39,11 @@ public class SearchRawmaterialsbyName extends javax.swing.JFrame {
         try {
             st=connection.createStatement();
             rs=st.executeQuery(query);
-            InventoryModel invmodel;
+            RawmaterialsModel invmodel;
             
             while(rs.next())
             {
-                invmodel=new InventoryModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"));
+                invmodel=new RawmaterialsModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"));
                 inventoryList.add(invmodel);
             }
                     
@@ -145,7 +145,7 @@ public class SearchRawmaterialsbyName extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_searchActionPerformed
-        ArrayList<InventoryModel> listdata=getInventoryList();
+        ArrayList<RawmaterialsModel> listdata=getInventoryList();
         DefaultTableModel model =(DefaultTableModel)jTable_inv_info.getModel();
         
         //clear all the row before apend the data tot he view
