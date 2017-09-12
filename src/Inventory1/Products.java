@@ -31,7 +31,7 @@ public class Products extends javax.swing.JFrame {
     ResultSet rs1 = null;
     public Products() {
         initComponents();
-        con= dbcon.connect();
+        
         showjTable();
     }
 
@@ -338,8 +338,7 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_proMouseClicked
 
     private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
-         String query="INSERT INTO `products`(`procategory`, `prosubcategory`, `size`, `color`, `prounitmeasure`,`procostperunit`) "
-                               + "VALUES ('"+cmb_productcategory.getSelectedItem()+"','"+cmb_prosubcategory.getSelectedItem()+"','"+cmb_size.getSelectedItem()+"','"+cmb_color.getSelectedItem()+"','"+cmb_prounitmeasure.getSelectedItem()+"','"+txt_procost.getText()+"')";
+         String query="INSERT INTO `products`(`procategory`, `prosubcategory`, `size`, `color`, `prounitmeasure`,`procostperunit`) " + "VALUES ('"+cmb_productcategory.getSelectedItem()+"','"+cmb_prosubcategory.getSelectedItem()+"','"+cmb_size.getSelectedItem()+"','"+cmb_color.getSelectedItem()+"','"+cmb_prounitmeasure.getSelectedItem()+"','"+txt_procost.getText()+"')";
         executeSqlQuery(query, "Insert");
     }//GEN-LAST:event_btn_InsertActionPerformed
 

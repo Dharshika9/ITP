@@ -7,14 +7,20 @@ package Inventory1;
 
 import dbConnect.dbcon;
 import static dbConnect.dbcon.connect;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+
+
 
 /**
  *
@@ -30,10 +36,10 @@ public class Suppliers extends javax.swing.JFrame {
    
     public Suppliers() {
         initComponents();
-        initComponents();
         con= dbcon.connect();
         showjTable();
     }
+    
 
    @SuppressWarnings("unchecked")
    
@@ -139,25 +145,30 @@ public class Suppliers extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Web site");
 
-        txt_buissname.setBackground(new java.awt.Color(153, 153, 153));
+        txt_buissname.setBackground(new java.awt.Color(204, 204, 204));
         txt_buissname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_contactname.setBackground(new java.awt.Color(153, 153, 153));
+        txt_contactname.setBackground(new java.awt.Color(204, 204, 204));
         txt_contactname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_country.setBackground(new java.awt.Color(153, 153, 153));
+        txt_country.setBackground(new java.awt.Color(204, 204, 204));
         txt_country.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_address.setBackground(new java.awt.Color(153, 153, 153));
+        txt_address.setBackground(new java.awt.Color(204, 204, 204));
         txt_address.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_phone.setBackground(new java.awt.Color(153, 153, 153));
+        txt_phone.setBackground(new java.awt.Color(204, 204, 204));
         txt_phone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_phone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_phoneActionPerformed(evt);
+            }
+        });
 
-        txt_email.setBackground(new java.awt.Color(153, 153, 153));
+        txt_email.setBackground(new java.awt.Color(204, 204, 204));
         txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txt_website.setBackground(new java.awt.Color(153, 153, 153));
+        txt_website.setBackground(new java.awt.Color(204, 204, 204));
         txt_website.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -175,15 +186,15 @@ public class Suppliers extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Item Name");
 
-        cmb_itemcat.setBackground(new java.awt.Color(153, 153, 153));
+        cmb_itemcat.setBackground(new java.awt.Color(204, 204, 204));
         cmb_itemcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_itemcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cmb_subcat.setBackground(new java.awt.Color(153, 153, 153));
+        cmb_subcat.setBackground(new java.awt.Color(204, 204, 204));
         cmb_subcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_subcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cmb_name.setBackground(new java.awt.Color(153, 153, 153));
+        cmb_name.setBackground(new java.awt.Color(204, 204, 204));
         cmb_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cmb_name.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -233,21 +244,21 @@ public class Suppliers extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Account No");
 
-        txt_accountno.setBackground(new java.awt.Color(153, 153, 153));
+        txt_accountno.setBackground(new java.awt.Color(204, 204, 204));
         txt_accountno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Currency");
 
-        txt_currency.setBackground(new java.awt.Color(153, 153, 153));
+        txt_currency.setBackground(new java.awt.Color(204, 204, 204));
         txt_currency.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Notes");
 
-        txt_notes.setBackground(new java.awt.Color(153, 153, 153));
+        txt_notes.setBackground(new java.awt.Color(204, 204, 204));
         txt_notes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -289,6 +300,7 @@ public class Suppliers extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btn_insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_insert.setText("Insert");
         btn_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,6 +308,7 @@ public class Suppliers extends javax.swing.JFrame {
             }
         });
 
+        btn_delete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_delete.setText("Delete");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,6 +316,7 @@ public class Suppliers extends javax.swing.JFrame {
             }
         });
 
+        btn_update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update.setText("Update");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,27 +360,24 @@ public class Suppliers extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addGap(59, 59, 59)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_delete))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_insert))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txt_website, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                                .addComponent(btn_update))))
+                            .addComponent(txt_website, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21))
+                .addGap(33, 137, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_insert)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_delete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_update)
+                .addGap(2, 2, 2))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,27 +397,28 @@ public class Suppliers extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_buissname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(btn_insert))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_contactname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(btn_delete))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_country, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_website, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(btn_update))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_insert)
+                    .addComponent(btn_delete)
+                    .addComponent(btn_update)))
         );
 
         jTable_supplier.setModel(new javax.swing.table.DefaultTableModel(
@@ -444,7 +456,7 @@ public class Suppliers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,7 +465,7 @@ public class Suppliers extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -497,26 +509,27 @@ public class Suppliers extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTable_supplierMouseClicked
 
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        String query ="UPDATE `suppliers` SET `businessname`='"+txt_buissname.getText()+"',`contactname`='"+txt_contactname.getText()+"',`country`='"+txt_country.getText()+"',`address`='"+txt_address.getText()+"',`phone`='"+txt_phone.getText()+"',`email`='"+txt_email.getText()+"',`website`='"+txt_website.getText()+"',`itemcategory`='"+cmb_itemcat.getSelectedItem()+"',`itemsubcategory`='"+cmb_subcat.getSelectedItem()+"',`itemname`='"+cmb_name.getSelectedItem()+"',`accountno`='"+txt_accountno.getText()+"',`currency`='"+txt_currency.getText()+"',`notes`='"+txt_notes.getText()+"' WHERE `supplierid`='"+lbl_suppid.getText()+"'";
+
+        executeSqlQuery(query, "Update");
+    }//GEN-LAST:event_btn_updateActionPerformed
+
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         String query="DELETE FROM `suppliers` WHERE `supplierid`='"+lbl_suppid.getText()+"'";
         executeSqlQuery(query, "Delete");
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String query="INSERT INTO `suppliers`( `businessname`, `contactname`, `color`, `prounitmeasure`,`procostperunit`) "
-                               + "VALUES ('"+txt_buissname.getText()+"','"+txt_contactname.getText()+"','"+cmb_size.getSelectedItem()+"','"+cmb_color.getSelectedItem()+"','"+cmb_prounitmeasure.getSelectedItem()+"','"+txt_procost.getText()+"')";
+
+        String query="INSERT INTO `suppliers`(`businessname`, `contactname`, `country`, `address`, `phone`, `email`, `website`, `itemcategory`, `itemsubcategory`, `itemname`, `accountno`, `currency`, `notes`)"
+        +"VALUES ('"+txt_buissname.getText()+"','"+txt_contactname.getText()+"','"+txt_country.getText()+"','"+txt_address.getText()+"','"+txt_phone.getText()+"','"+txt_email.getText()+"','"+txt_website.getText()+"','"+cmb_itemcat.getSelectedItem()+"','"+cmb_subcat.getSelectedItem()+"','"+cmb_name.getSelectedItem()+"','"+txt_accountno.getText()+"','"+txt_currency.getText()+"','"+txt_notes.getText()+"')";
         executeSqlQuery(query, "Insert");
-                
-                
-                
-                
-                
-                
     }//GEN-LAST:event_btn_insertActionPerformed
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-       
-    }//GEN-LAST:event_btn_updateActionPerformed
+    private void txt_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_phoneActionPerformed
+
+    }//GEN-LAST:event_txt_phoneActionPerformed
     public ArrayList<Suppliersmodel> getSuppliersList()
     {
         ArrayList<Suppliersmodel> supplierslist=new ArrayList<>();
@@ -575,7 +588,7 @@ public class Suppliers extends javax.swing.JFrame {
       public void ClearField()
     {
         
-        
+        lbl_suppid.setText(null);
         txt_buissname.setText(null);
         txt_contactname.setText(null);
         txt_country.setText(null);
@@ -600,21 +613,36 @@ public class Suppliers extends javax.swing.JFrame {
          Connection conn= connect();
          Statement st;
          try {
-              st=con.createStatement();
-              if((st.executeUpdate(query))==1)
-              {
-                  // data get refresh after query runs 
-                  DefaultTableModel model = (DefaultTableModel)jTable_supplier.getModel();
-                  model.setRowCount(0);
-                  showjTable();
+                st=con.createStatement();
+              
+                Emailvalidator emailValidator = new Emailvalidator();
+                if(emailValidator.validate(txt_email.getText().trim())) {
+                              
+              
+              
+                            if((st.executeUpdate(query))==1)
+                                {
                   
                   
-                  // message box
-                  JOptionPane.showMessageDialog(null, "Data "+message+" Successfully");
-                  ClearField();
-              }else{
-                  JOptionPane.showMessageDialog(null, "Data "+message+" Failed");
-              }
+                                    // data get refresh after query runs 
+                                        DefaultTableModel model = (DefaultTableModel)jTable_supplier.getModel();
+                                        model.setRowCount(0);
+                                        showjTable();
+                  
+                  
+                                    // message box
+                                        JOptionPane.showMessageDialog(null, "Data "+message+" Successfully");
+                                        ClearField();
+                                }
+                
+              } 
+                else if(!emailValidator.validate(txt_email.getText().trim())) {
+                        txt_email.setForeground(new Color(255,0,0));
+                       
+                        JOptionPane.showMessageDialog(null, "Data "+message+" Failed");
+                        txt_email.setText(null);
+                        
+                }
          } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
          }
@@ -622,30 +650,7 @@ public class Suppliers extends javax.swing.JFrame {
      }
    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Suppliers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Suppliers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Suppliers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Suppliers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Suppliers().setVisible(true);
