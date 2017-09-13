@@ -406,11 +406,11 @@ public class Products extends javax.swing.JFrame {
     }
       public void ClearField()
     {
-        cmb_productcategory.setSelectedItem("Select");
-        cmb_prosubcategory.setSelectedItem("Select");
-        cmb_size.setSelectedItem("Select");
-        cmb_color.setSelectedItem("Select");
-        cmb_prounitmeasure.setSelectedItem("Select");
+        cmb_productcategory.setSelectedItem(null);
+        cmb_prosubcategory.setSelectedItem(null);
+        cmb_size.setSelectedItem(null);
+        cmb_color.setSelectedItem(null);
+        cmb_prounitmeasure.setSelectedItem(null);
         txt_procost.setText(null);
         
     }
