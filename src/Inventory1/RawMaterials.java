@@ -532,6 +532,8 @@ String ImgPath = null;
     
     //when clicked the table  row appears on form
     private void jTable_invMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_invMouseClicked
+        
+        try{
         int i=jTable_inv.getSelectedRow();
         TableModel model=jTable_inv.getModel();
        
@@ -547,6 +549,16 @@ String ImgPath = null;
         
         
        
+      BufferedImage buff=null;
+      ImageIcon imgicon =null;
+      Blob blob =(Blob) model.getValueAt(i, 11);
+      InputStream is =blob.getBinaryStream();
+      buff=ImageIO.read(is);
+      imgicon=new ImageIcon(buff.getScaledInstance(lbl_image.getWidth(),lbl_image.getHeight(),java.awt.Image.SCALE_SMOOTH));
+      lbl_image.setIcon(imgicon);
+        } catch (Exception e) {
+        }
+      
       
       
         
