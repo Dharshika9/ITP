@@ -17,9 +17,11 @@ public class RawmaterialsModel {
     private double cost;
     private double stockqty;
     private String orderstatus;
+    private byte[]  myimage;
     
     
-    public RawmaterialsModel(int Code, String Category, String Subcategory, String Name, String Color, String Unitmeasure, double Startinv, double Reorder, double Cost, double Stockqty, String Orderstatus)
+    
+    public RawmaterialsModel(int Code, String Category, String Subcategory, String Name, String Color, String Unitmeasure, double Startinv, double Reorder, double Cost, double Stockqty, String Orderstatus,byte[] MyImage)
     {
         this.code=Code;
         this.category=Category;
@@ -32,6 +34,8 @@ public class RawmaterialsModel {
         this.cost=Cost;
         this.stockqty=Stockqty;
         this.orderstatus=Orderstatus;
+        this.myimage=MyImage;
+
 
         
     }
@@ -189,4 +193,19 @@ public class RawmaterialsModel {
     public void setOrderstatus(String orderstatus) {
         this.orderstatus = orderstatus;
     }
+    
+    
+      public byte[] getMyImage() {
+        return myimage;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    public void setMyImage(byte[] myimage) {
+        this.myimage = myimage;
+    }
+
+    
+    
 }

@@ -4,20 +4,53 @@
  * and open the template in the editor.
  */
 package Inventory1;
-
+import java.awt.Image;
 import dbConnect.dbcon;
 import static dbConnect.dbcon.connect;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.sound.midi.SysexMessage;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -35,9 +68,10 @@ public class RawMaterials extends javax.swing.JFrame {
     public RawMaterials() {
         initComponents();
         con= dbcon.connect();
+        
         showjTable();//Visibel after form loaded
     }
-
+String ImgPath = null;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +105,9 @@ public class RawMaterials extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lbl_code = new javax.swing.JLabel();
+        lbl_image = new javax.swing.JLabel();
+        btn_image = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_inv = new javax.swing.JTable();
 
@@ -113,7 +150,7 @@ public class RawMaterials extends javax.swing.JFrame {
 
         cmb_category.setBackground(new java.awt.Color(153, 153, 153));
         cmb_category.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_category.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Fabrics", "Buttons", "Elastics", "Zipper" }));
+        cmb_category.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fabrics", "Buttons", "Elastics", "Zipper" }));
         cmb_category.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmb_categoryItemStateChanged(evt);
@@ -174,6 +211,20 @@ public class RawMaterials extends javax.swing.JFrame {
         lbl_code.setForeground(new java.awt.Color(51, 51, 51));
         lbl_code.setText("jLabel9");
 
+        lbl_image.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btn_image.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_image.setText("Upload Image");
+        btn_image.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_imageActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Rs");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -181,80 +232,108 @@ public class RawMaterials extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel18)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel8))
                 .addGap(50, 50, 50)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_costperunit, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_startinv, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb_unitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_name)
-                    .addComponent(cmb_subcategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmb_category, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmb_color, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_costperunit, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(10, 10, 10)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(lbl_code)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addComponent(lbl_code))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmb_category, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_subcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_color, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_unitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1))
+                            .addComponent(txt_startinv, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(82, 82, 82)
+                        .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_image))
+                    .addComponent(txt_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_subcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_unitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_startinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_costperunit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete)
-                    .addComponent(btnInsert)
-                    .addComponent(lbl_code))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel4)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel18)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cmb_category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(cmb_subcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(cmb_color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(cmb_unitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_startinv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(btn_image)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnInsert))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnUpdate))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnDelete))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lbl_code))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_costperunit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTable_inv.setModel(new javax.swing.table.DefaultTableModel(
@@ -262,7 +341,7 @@ public class RawMaterials extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Code", "Category", "Sub Category", "Name", "Color", "Units of measure", "Starting Inventory", "Re order Level", "Cost/Unit", "Stock Qty", "Status"
+                "Code", "Category", "Sub Category", "Name", "Color", "Units of measure", "Starting Inventory", "Re order Level", "Cost/Unit", "Stock Qty", "Status", "image"
             }
         ));
         jTable_inv.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -271,29 +350,30 @@ public class RawMaterials extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable_inv);
+        if (jTable_inv.getColumnModel().getColumnCount() > 0) {
+            jTable_inv.getColumnModel().getColumn(11).setMinWidth(120);
+            jTable_inv.getColumnModel().getColumn(11).setPreferredWidth(150);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,6 +405,7 @@ public class RawMaterials extends javax.swing.JFrame {
         String[] y = new String[5];
         if(x.equalsIgnoreCase("Fabrics"))
         {
+                   
             y[0] = "Shirt Fabric";
             y[1] = "Trouser fabric";
             y[2] = "Undergarment fabric";
@@ -359,7 +440,7 @@ public class RawMaterials extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                invmodel=new RawmaterialsModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"));
+                invmodel=new RawmaterialsModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"),rs.getBytes("image"));
                 inventoryList.add(invmodel);
             }
                     
@@ -374,7 +455,7 @@ public class RawMaterials extends javax.swing.JFrame {
         ArrayList<RawmaterialsModel> listdata=getInventoryList();
         DefaultTableModel model =(DefaultTableModel)jTable_inv.getModel();
         
-        Object [] row=new Object[11];
+        Object [] row=new Object[12];
         for(int i = 0;i<listdata.size();i++)
         {
             row[0]=listdata.get(i).getCode();
@@ -388,6 +469,11 @@ public class RawMaterials extends javax.swing.JFrame {
             row[8]=listdata.get(i).getCost();
             row[9]=listdata.get(i).getStockqty();
             row[10]=listdata.get(i).getOrderstatus();
+            row[11]=listdata.get(i).getMyImage();
+                        
+           
+
+
             
             model.addRow(row);
         }
@@ -396,11 +482,53 @@ public class RawMaterials extends javax.swing.JFrame {
     
     //insert data method
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        String query="INSERT INTO `rawmaterials`(`category`, `subcategory`, `name`, `color`, `unitmeasure`,`startinginv`,`reorder`,`cost`,`stockqty`,`orderstatus`) "
-                               + "VALUES ('"+cmb_category.getSelectedItem()+"','"+cmb_subcategory.getSelectedItem()+"','"+txt_name.getText()+"','"+cmb_color.getSelectedItem()+"','"+cmb_unitmeasure.getSelectedItem()+"','"+txt_startinv.getText()+"','"+txt_reorder.getText()+"','"+txt_costperunit.getText()+"','"+txt_startinv.getText()+"','NO')";
-        executeSqlQuery(query, "Insert");
+       try{
+         int x = JOptionPane.showConfirmDialog(null,"Do you want to add new record?");
+        
+        if(x==0)
+        {
+            InputStream img = new FileInputStream(new File(ImgPath));
+              String query="INSERT INTO `rawmaterials`(`category`, `subcategory`, `name`, `color`, `unitmeasure`,`startinginv`,`reorder`,`cost`,`stockqty`,`orderstatus`,`image`) "
+                               + "VALUES ('"+cmb_category.getSelectedItem()+"','"+cmb_subcategory.getSelectedItem()+"','"+txt_name.getText()+"','"+cmb_color.getSelectedItem()+"','"+cmb_unitmeasure.getSelectedItem()+"','"+txt_startinv.getText()+"','"+txt_reorder.getText()+"','"+txt_costperunit.getText()+"','"+txt_startinv.getText()+"','NO','"+(img)+"')";
+               executeSqlQuery(query, "Insert");
+                     
+           
+                 
+                
+                
+               
+        }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+       }catch(Exception e){} 
+        
+        System.out.println("Image => "+ImgPath);
+      
     }//GEN-LAST:event_btnInsertActionPerformed
 
+    public ImageIcon ResizeImage(String imagePath, byte[] pic)
+{
+                ImageIcon myImage = null;
+
+                if(imagePath != null)
+            {
+                myImage = new ImageIcon(imagePath);
+            }
+                else{
+                        myImage = new ImageIcon(pic);
+                    }
+
+            Image img = myImage.getImage();
+            Image img2 = img.getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon image = new ImageIcon(img2);
+            return image;
+
+}
+   
+    
     
     //when clicked the table  row appears on form
     private void jTable_invMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_invMouseClicked
@@ -416,18 +544,86 @@ public class RawMaterials extends javax.swing.JFrame {
         txt_startinv.setText(model.getValueAt(i, 6).toString());
         txt_reorder.setText(model.getValueAt(i, 7).toString());
         txt_costperunit.setText(model.getValueAt(i, 8).toString());
+        
+        
        
+      
+      
+        
+        
+        
+            
+        
+         
+
+        
     }//GEN-LAST:event_jTable_invMouseClicked
 
+    
+    
+    
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        
+        int x = JOptionPane.showConfirmDialog(null,"Do you want to Update record?");
+        
+        if(x==0)
+        {
+        
         String query="UPDATE `rawmaterials` SET `category`='"+cmb_category.getSelectedItem()+"',`subcategory`='"+cmb_subcategory.getSelectedItem()+"',`name`='"+txt_name.getText()+"',`color`='"+cmb_color.getSelectedItem()+"',`unitmeasure`='"+cmb_unitmeasure.getSelectedItem()+"',`startinginv`='"+txt_startinv.getText()+"',`reorder`='"+txt_reorder.getText()+"',`cost`='"+txt_costperunit.getText()+"' WHERE `code`='"+lbl_code.getText()+"'";
         executeSqlQuery(query, "Update");
+        
+        
+        
+         }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+        
+        
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+      
+        int x = JOptionPane.showConfirmDialog(null,"Do you want to Delete record ?");
+        
+        if(x==0)
+        {
+        
         String query="DELETE FROM `rawmaterials` WHERE `code`='"+lbl_code.getText()+"'";
         executeSqlQuery(query, "Delete");
+        
+        
+           }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    
+    private void btn_imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_imageActionPerformed
+        JFileChooser file = new JFileChooser();
+        file.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.images", "jpg","png");
+        file.addChoosableFileFilter(filter);
+        int result = file.showSaveDialog(null);
+        if(result == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = file.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            lbl_image.setIcon(ResizeImage(path, null));
+            ImgPath = path;
+}
+else{
+System.out.println("No File Selected");
+}  // TODO add your handling code here:
+    }//GEN-LAST:event_btn_imageActionPerformed
 
     public void ClearField()
     {
@@ -435,6 +631,7 @@ public class RawMaterials extends javax.swing.JFrame {
         txt_costperunit.setText(null);
         txt_reorder.setText(null);
         txt_startinv.setText(null);
+        
         
         
     }
@@ -461,8 +658,9 @@ public class RawMaterials extends javax.swing.JFrame {
               }
          } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
+            
          }
-     
+         
      }
 
     
@@ -505,6 +703,7 @@ public class RawMaterials extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btn_image;
     private javax.swing.JComboBox cmb_category;
     private javax.swing.JComboBox cmb_color;
     private javax.swing.JComboBox cmb_subcategory;
@@ -518,11 +717,13 @@ public class RawMaterials extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_inv;
     private javax.swing.JLabel lbl_code;
+    private javax.swing.JLabel lbl_image;
     private javax.swing.JTextField txt_costperunit;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_reorder;

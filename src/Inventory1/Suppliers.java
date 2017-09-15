@@ -8,6 +8,7 @@ package Inventory1;
 import dbConnect.dbcon;
 import static dbConnect.dbcon.connect;
 import java.awt.Color;
+import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -72,7 +74,7 @@ public class Suppliers extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cmb_itemcat = new javax.swing.JComboBox();
-        cmb_subcat = new javax.swing.JComboBox();
+        cmb_itemsubcat = new javax.swing.JComboBox();
         cmb_name = new javax.swing.JComboBox();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -188,11 +190,15 @@ public class Suppliers extends javax.swing.JFrame {
 
         cmb_itemcat.setBackground(new java.awt.Color(204, 204, 204));
         cmb_itemcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_itemcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_itemcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Fabrics", "Buttons", "Elastics", "Zipper" }));
+        cmb_itemcat.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_itemcatItemStateChanged(evt);
+            }
+        });
 
-        cmb_subcat.setBackground(new java.awt.Color(204, 204, 204));
-        cmb_subcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_subcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_itemsubcat.setBackground(new java.awt.Color(204, 204, 204));
+        cmb_itemsubcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         cmb_name.setBackground(new java.awt.Color(204, 204, 204));
         cmb_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -215,7 +221,7 @@ public class Suppliers extends javax.swing.JFrame {
                             .addComponent(jLabel15))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmb_subcat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmb_itemsubcat, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmb_name, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(19, 19, 19))
         );
@@ -228,7 +234,7 @@ public class Suppliers extends javax.swing.JFrame {
                     .addComponent(cmb_itemcat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_subcat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_itemsubcat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,7 +502,7 @@ public class Suppliers extends javax.swing.JFrame {
         txt_contactname.setText(model.getValueAt(i, 2).toString());
         txt_country.setText(model.getValueAt(i, 3).toString());
         cmb_itemcat.setSelectedItem(model.getValueAt(i, 4).toString());
-        cmb_subcat.setSelectedItem(model.getValueAt(i, 5).toString());
+        cmb_itemsubcat.setSelectedItem(model.getValueAt(i, 5).toString());
         cmb_name.setSelectedItem(model.getValueAt(i, 6).toString());
         txt_address.setText(model.getValueAt(i, 7).toString());
         txt_phone.setText(model.getValueAt(i, 8).toString());
@@ -510,7 +516,7 @@ public class Suppliers extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_supplierMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String query ="UPDATE `suppliers` SET `businessname`='"+txt_buissname.getText()+"',`contactname`='"+txt_contactname.getText()+"',`country`='"+txt_country.getText()+"',`address`='"+txt_address.getText()+"',`phone`='"+txt_phone.getText()+"',`email`='"+txt_email.getText()+"',`website`='"+txt_website.getText()+"',`itemcategory`='"+cmb_itemcat.getSelectedItem()+"',`itemsubcategory`='"+cmb_subcat.getSelectedItem()+"',`itemname`='"+cmb_name.getSelectedItem()+"',`accountno`='"+txt_accountno.getText()+"',`currency`='"+txt_currency.getText()+"',`notes`='"+txt_notes.getText()+"' WHERE `supplierid`='"+lbl_suppid.getText()+"'";
+        String query ="UPDATE `suppliers` SET `businessname`='"+txt_buissname.getText()+"',`contactname`='"+txt_contactname.getText()+"',`country`='"+txt_country.getText()+"',`address`='"+txt_address.getText()+"',`phone`='"+txt_phone.getText()+"',`email`='"+txt_email.getText()+"',`website`='"+txt_website.getText()+"',`itemcategory`='"+cmb_itemcat.getSelectedItem()+"',`itemsubcategory`='"+cmb_itemsubcat.getSelectedItem()+"',`itemname`='"+cmb_name.getSelectedItem()+"',`accountno`='"+txt_accountno.getText()+"',`currency`='"+txt_currency.getText()+"',`notes`='"+txt_notes.getText()+"' WHERE `supplierid`='"+lbl_suppid.getText()+"'";
 
         executeSqlQuery(query, "Update");
     }//GEN-LAST:event_btn_updateActionPerformed
@@ -523,13 +529,49 @@ public class Suppliers extends javax.swing.JFrame {
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
 
         String query="INSERT INTO `suppliers`(`businessname`, `contactname`, `country`, `address`, `phone`, `email`, `website`, `itemcategory`, `itemsubcategory`, `itemname`, `accountno`, `currency`, `notes`)"
-        +"VALUES ('"+txt_buissname.getText()+"','"+txt_contactname.getText()+"','"+txt_country.getText()+"','"+txt_address.getText()+"','"+txt_phone.getText()+"','"+txt_email.getText()+"','"+txt_website.getText()+"','"+cmb_itemcat.getSelectedItem()+"','"+cmb_subcat.getSelectedItem()+"','"+cmb_name.getSelectedItem()+"','"+txt_accountno.getText()+"','"+txt_currency.getText()+"','"+txt_notes.getText()+"')";
+        +"VALUES ('"+txt_buissname.getText()+"','"+txt_contactname.getText()+"','"+txt_country.getText()+"','"+txt_address.getText()+"','"+txt_phone.getText()+"','"+txt_email.getText()+"','"+txt_website.getText()+"','"+cmb_itemcat.getSelectedItem()+"','"+cmb_itemsubcat.getSelectedItem()+"','"+cmb_name.getSelectedItem()+"','"+txt_accountno.getText()+"','"+txt_currency.getText()+"','"+txt_notes.getText()+"')";
         executeSqlQuery(query, "Insert");
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void txt_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_phoneActionPerformed
 
     }//GEN-LAST:event_txt_phoneActionPerformed
+
+    public String[] getx(String x)
+    {
+        String[] y = new String[5];
+        if(x.equalsIgnoreCase("Fabrics"))
+        {
+            y[0] = "Shirt Fabric";
+            y[1] = "Trouser fabric";
+            y[2] = "Undergarment fabric";
+            
+        }
+        else if(x.equalsIgnoreCase("Buttons"))
+        {
+            y[0] ="2 hole button";
+            y[1] ="4 hole button";
+            y[2] ="Shank";       
+            
+        }
+        
+        
+        return y;
+    }
+    
+    
+    private void cmb_itemcatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_itemcatItemStateChanged
+           if(evt.getStateChange() == ItemEvent.SELECTED)
+       {
+           if(this.cmb_itemcat.getSelectedIndex()>0)
+           {
+               this.cmb_itemsubcat.setModel(new DefaultComboBoxModel(this.getx(this.cmb_itemcat.getSelectedItem().toString())));
+           }
+       }
+    }//GEN-LAST:event_cmb_itemcatItemStateChanged
+   
+      
+    
     public ArrayList<Suppliersmodel> getSuppliersList()
     {
         ArrayList<Suppliersmodel> supplierslist=new ArrayList<>();
@@ -555,6 +597,13 @@ public class Suppliers extends javax.swing.JFrame {
         }
         return supplierslist;
     }  
+    
+   
+    
+    
+    
+    
+    
      public void showjTable()
     {
         ArrayList<Suppliersmodel> listdata=getSuppliersList();
@@ -593,7 +642,7 @@ public class Suppliers extends javax.swing.JFrame {
         txt_contactname.setText(null);
         txt_country.setText(null);
         cmb_itemcat.setSelectedItem("");
-        cmb_subcat.setSelectedItem("");
+        cmb_itemsubcat.setSelectedItem("");
         cmb_name.setSelectedItem("");
         txt_address.setText(null);
         txt_phone.setText(null);
@@ -663,8 +712,8 @@ public class Suppliers extends javax.swing.JFrame {
     private javax.swing.JButton btn_insert;
     private javax.swing.JButton btn_update;
     private javax.swing.JComboBox cmb_itemcat;
+    private javax.swing.JComboBox cmb_itemsubcat;
     private javax.swing.JComboBox cmb_name;
-    private javax.swing.JComboBox cmb_subcat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
