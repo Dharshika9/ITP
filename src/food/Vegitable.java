@@ -13,8 +13,9 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import net.proteanit.sql.DbUtils;
-
+import food.Func;
 /**
  *
  * @author Yasitha Milan
@@ -32,6 +33,7 @@ public class Vegitable extends javax.swing.JFrame {
         
         tableload1();
         showdate();
+        jLabel2.setText(Func.getNextID("VegiID", "vegi", "V", conn));
         
     }
     
@@ -57,6 +59,23 @@ public class Vegitable extends javax.swing.JFrame {
         jTextField4.setText(s.format(d1));
         
     }
+    public int isnumber(String m)
+    {
+        int a = 1;
+        
+        if(!m.isEmpty())
+        {
+            for(int i=0;i<m.length();i++)
+            {
+                if(!Character.isDigit(m.charAt(i)))
+                {
+                    a=0;
+                }
+            }
+        }
+        
+        return a;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,31 +94,31 @@ public class Vegitable extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
+        Search = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        ADD = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        Update = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        Delete = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        Refresh = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel11 = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(455, 244));
+        setLocation(new java.awt.Point(461, 244));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(871, 424));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
@@ -133,87 +152,90 @@ public class Vegitable extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(813, 191, -1, 36));
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 334, 118, 37));
 
-        jPanel9.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel9.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel9.setPreferredSize(new java.awt.Dimension(124, 37));
-        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        Search.setBackground(new java.awt.Color(102, 102, 102));
+        Search.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Search.setForeground(new java.awt.Color(102, 102, 102));
+        Search.setPreferredSize(new java.awt.Dimension(124, 37));
+        Search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel9MouseEntered(evt);
+                SearchMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel9MouseExited(evt);
+                SearchMouseExited(evt);
             }
         });
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Search");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout SearchLayout = new javax.swing.GroupLayout(Search);
+        Search.setLayout(SearchLayout);
+        SearchLayout.setHorizontalGroup(
+            SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SearchLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel10)
                 .addContainerGap(48, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        SearchLayout.setVerticalGroup(
+            SearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 334, -1, -1));
+        jPanel1.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 334, -1, -1));
 
-        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel6.setPreferredSize(new java.awt.Dimension(124, 37));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        ADD.setBackground(new java.awt.Color(51, 51, 51));
+        ADD.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        ADD.setPreferredSize(new java.awt.Dimension(124, 37));
+        ADD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                ADDMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel6MouseEntered(evt);
+                ADDMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel6MouseExited(evt);
+                ADDMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel6MousePressed(evt);
+                ADDMousePressed(evt);
             }
         });
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ADD");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout ADDLayout = new javax.swing.GroupLayout(ADD);
+        ADD.setLayout(ADDLayout);
+        ADDLayout.setHorizontalGroup(
+            ADDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ADDLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel7)
                 .addContainerGap(55, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ADDLayout.setVerticalGroup(
+            ADDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, -1, -1));
+        jPanel1.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, -1, -1));
 
-        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel7.setPreferredSize(new java.awt.Dimension(124, 37));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        Update.setBackground(new java.awt.Color(51, 51, 51));
+        Update.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Update.setPreferredSize(new java.awt.Dimension(124, 37));
+        Update.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                UpdateMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
+                UpdateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel7MouseExited(evt);
+                UpdateMouseExited(evt);
             }
         });
 
@@ -221,78 +243,78 @@ public class Vegitable extends javax.swing.JFrame {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("UPDATE");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout UpdateLayout = new javax.swing.GroupLayout(Update);
+        Update.setLayout(UpdateLayout);
+        UpdateLayout.setHorizontalGroup(
+            UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(UpdateLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        UpdateLayout.setVerticalGroup(
+            UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, -1, -1));
+        jPanel1.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, -1, -1));
 
-        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel8.setPreferredSize(new java.awt.Dimension(124, 37));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        Delete.setBackground(new java.awt.Color(51, 51, 51));
+        Delete.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Delete.setPreferredSize(new java.awt.Dimension(124, 37));
+        Delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
+                DeleteMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel8MouseEntered(evt);
+                DeleteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel8MouseExited(evt);
+                DeleteMouseExited(evt);
             }
         });
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("DELETE");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout DeleteLayout = new javax.swing.GroupLayout(Delete);
+        Delete.setLayout(DeleteLayout);
+        DeleteLayout.setHorizontalGroup(
+            DeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DeleteLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel9)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        DeleteLayout.setVerticalGroup(
+            DeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 330, -1, -1));
+        jPanel1.add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 330, -1, -1));
 
-        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel10.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        Refresh.setBackground(new java.awt.Color(51, 51, 51));
+        Refresh.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        Refresh.setForeground(new java.awt.Color(51, 51, 51));
+        Refresh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel10MouseClicked(evt);
+                RefreshMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel10MouseEntered(evt);
+                RefreshMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanel10MouseExited(evt);
+                RefreshMouseExited(evt);
             }
         });
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Refresh.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Refresh");
-        jPanel10.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 1, 47, 26));
+        Refresh.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 1, 47, 26));
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 370, 120, -1));
+        jPanel1.add(Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 370, 120, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -329,9 +351,6 @@ public class Vegitable extends javax.swing.JFrame {
 
         jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 117, 10, -1));
 
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(719, 89, 132, 40));
-
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("FoodName");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
@@ -358,6 +377,30 @@ public class Vegitable extends javax.swing.JFrame {
         jLabel5.setText("Reserved Date");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 280, 90, 40));
 
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel2.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 90, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -372,104 +415,149 @@ public class Vegitable extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseExited
-        jPanel8.setBackground(new Color (51,51,51));
-    }//GEN-LAST:event_jPanel8MouseExited
+    private void DeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseExited
+        Delete.setBackground(new Color (51,51,51));
+    }//GEN-LAST:event_DeleteMouseExited
 
-    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
-        jPanel8.setBackground(new Color (255,102,102));
-    }//GEN-LAST:event_jPanel8MouseEntered
+    private void DeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseEntered
+        Delete.setBackground(new Color (255,102,102));
+    }//GEN-LAST:event_DeleteMouseEntered
 
-    private void jPanel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseExited
-        jPanel7.setBackground(new Color (51,51,51));
-    }//GEN-LAST:event_jPanel7MouseExited
+    private void UpdateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateMouseExited
+        Update.setBackground(new Color (51,51,51));
+    }//GEN-LAST:event_UpdateMouseExited
 
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseEntered
-        jPanel7.setBackground(new Color (255,102,102));
-    }//GEN-LAST:event_jPanel7MouseEntered
+    private void UpdateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateMouseEntered
+        Update.setBackground(new Color (255,102,102));
+    }//GEN-LAST:event_UpdateMouseEntered
 
-    private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
-        jPanel6.setBackground(new Color (0,255,0));
-    }//GEN-LAST:event_jPanel6MousePressed
+    private void ADDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMousePressed
+        ADD.setBackground(new Color (0,255,0));
+    }//GEN-LAST:event_ADDMousePressed
 
-    private void jPanel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseExited
+    private void ADDMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseExited
 
-        jPanel6.setBackground(new Color (51,51,51));
-    }//GEN-LAST:event_jPanel6MouseExited
+        ADD.setBackground(new Color (51,51,51));
+    }//GEN-LAST:event_ADDMouseExited
 
-    private void jPanel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseEntered
+    private void ADDMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseEntered
 
-        jPanel6.setBackground(new Color (255,102,102));
-    }//GEN-LAST:event_jPanel6MouseEntered
+        ADD.setBackground(new Color (255,102,102));
+    }//GEN-LAST:event_ADDMouseEntered
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void ADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseClicked
 
-        String v_id = jTextField6.getText();
+        String v_id = jLabel2.getText();
         String v_name = jTextField1.getText();
         String v_quan = jTextField2.getText();
         String v_lastDate = jTextField4.getText();
         //        String v_lastDate = jTextField4.getText();
-        
-//        while()
-            try{
 
-                    String q2 = "INSERT INTO vegi (VegiID,VegiName,Quantity,LastDate) values ('"+v_id+"','"+v_name+"','"+v_quan+"','"+v_lastDate+"')";
+        if(v_name.isEmpty() || v_quan.isEmpty())
+        {
+            showMessageDialog(null,"Enter essential Data");
+//            jTextField1.setText(null);
+            jTextField2.setText(null);
+        }
+        if(isnumber(v_quan)==0)
+        {
+            showMessageDialog(null,"No letter are allowed in Quantity");
+            jTextField2.setText(null);
+        }
+        try{
+
+            String q2 = "INSERT INTO vegi (VegiID,VegiName,Quantity,LastDate) values ('"+v_id+"','"+v_name+"','"+v_quan+"','"+v_lastDate+"')";
                     pst = conn.prepareStatement(q2);
                     pst.execute();
                     
                     tableload1();
-            }
-                    catch(Exception e){
+                    jLabel2.setText(Func.getNextID("VegiID", "vegi", "V", conn));
+                    jTextField2.setText(null);
+                    jTextField1.setText(null);
+                    showMessageDialog(null,"Successfully Added");
+        }
+        catch(Exception e){
 
             System.out.println(e);
 
         }
-        jTextField6.setText(null);
-        jTextField1.setText(null);
-        jTextField2.setText(null);
+//        jTextField6.setText(null);
+        
+        
         jTextField3.setText(null);
-    }//GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_ADDMouseClicked
 
-    private void jPanel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseExited
-        jPanel9.setBackground(new Color (51,51,51));
-    }//GEN-LAST:event_jPanel9MouseExited
+    private void SearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseExited
+        Search.setBackground(new Color (51,51,51));
+    }//GEN-LAST:event_SearchMouseExited
 
-    private void jPanel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseEntered
-        jPanel9.setBackground(new Color (0,0,0));
-    }//GEN-LAST:event_jPanel9MouseEntered
+    private void SearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseEntered
+        Search.setBackground(new Color (0,0,0));
+    }//GEN-LAST:event_SearchMouseEntered
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateMouseClicked
         
         int x = JOptionPane.showConfirmDialog(null,"Do you want to Update this");
-        
+        double v1 = 0;
+        double v2 = 0;
+        double vv = 0;
         if(x==0)
         {
-            String v_id = jTextField6.getText();
+            String v_id = jLabel2.getText();
             String v_name = jTextField1.getText();
-            String v_quan = jTextField2.getText();
+            String v_quan1 =jTextField2.getText();
             String v_lastDate = jTextField4.getText();
             
-            String sql = "UPDATE vegi SET VegiID='"+v_id+"' , VegiName='"+v_name+"' , Quantity='"+v_quan+"' , LastDate='"+v_lastDate+"' WHERE VegiID='"+v_id+"'";
             
+            
+            
+                        
             try {
-                pst = conn.prepareStatement(sql);
-                pst.execute();
+                String sql1 = "SELECT * FROM vegi WHERE VegiID='"+v_id+"'";
+                pst = conn.prepareStatement(sql1);
+                rst = pst.executeQuery();
                 
-                tableload1();
+                if( v_quan1.isEmpty())
+                {
+                   String sql = "UPDATE vegi SET VegiName='"+v_name+"' WHERE VegiID='"+v_id+"'";
+                    pst = conn.prepareStatement(sql);
+                    pst.execute();
+                    
+                    tableload1();
+                    showMessageDialog(null,"Successfully Food Name Updated");
+                }
+                else
+                {
+                    while(rst.next())
+                    {
+                        
+                        v2 = rst.getDouble("Quantity");
+                    }
+                        v1 = Double.parseDouble(v_quan1);
+                        vv=v1+v2;
+                        String v_quan2 = Double.toString(vv);
+                
+                        String sql = "UPDATE vegi SET VegiID='"+v_id+"' , VegiName='"+v_name+"' , Quantity='"+v_quan2+"' , LastDate='"+v_lastDate+"' WHERE VegiID='"+v_id+"'";
+                        pst = conn.prepareStatement(sql);
+                        pst.execute();
+                
+                        tableload1();
+                        showMessageDialog(null,"Successfully Updated");
+                }
                 
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
-        jTextField6.setText(null);
+        jLabel2.setText(null);
         jTextField1.setText(null);
         jTextField2.setText(null);
         jTextField3.setText(null);
-    }//GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_UpdateMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
@@ -478,22 +566,22 @@ public class Vegitable extends javax.swing.JFrame {
         
         String v_id = jTable1.getValueAt(r,0).toString();
         String v_name  = jTable1.getValueAt(r, 1).toString();
-        String v_quan = jTable1.getValueAt(r, 2).toString();
+//        String v_quan = jTable1.getValueAt(r, 2).toString();
         String v_lastDate  = jTable1.getValueAt(r, 3).toString();
         
-        jTextField6.setText(v_id);
+        jLabel2.setText(v_id);
         jTextField1.setText(v_name);
-        jTextField2.setText(v_quan);
+//        jTextField2.setText(v_quan);
         jTextField3.setText(v_lastDate);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+    private void DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseClicked
         
         int x = JOptionPane.showConfirmDialog(null,"Do you want to Delete this");
         
         if(x==0)
         {
-            String v_id = jTextField6.getText();
+            String v_id = jLabel2.getText();
             
             String sql = "DELETE from vegi WHERE VegiID='"+v_id+"'";
             
@@ -503,33 +591,51 @@ public class Vegitable extends javax.swing.JFrame {
                 pst.execute();
                 
                 tableload1();
+                jLabel2.setText(Func.getNextID("VegiID", "vegi", "V", conn));
                 
                 
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
-        jTextField6.setText(null);
-        jTextField1.setText(null);
-        jTextField2.setText(null);
-        jTextField3.setText(null);
-    }//GEN-LAST:event_jPanel8MouseClicked
-
-    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
-        jTextField6.setText(null);
-        jTextField1.setText(null);
-        jTextField2.setText(null);
-        jTextField3.setText(null);
-    }//GEN-LAST:event_jPanel10MouseClicked
-
-    private void jPanel10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseEntered
         
-        jPanel10.setBackground(new Color (0,0,0));
-    }//GEN-LAST:event_jPanel10MouseEntered
+        jTextField1.setText(null);
+        jTextField2.setText(null);
+        jTextField3.setText(null);
+    }//GEN-LAST:event_DeleteMouseClicked
 
-    private void jPanel10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseExited
-        jPanel10.setBackground(new Color (51,51,51));
-    }//GEN-LAST:event_jPanel10MouseExited
+    private void RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RefreshMouseClicked
+//        jTextField6.setText(null);
+        jTextField1.setText(null);
+        jTextField2.setText(null);
+        jTextField3.setText(null);
+        jTextField5.setText(null);
+        jLabel2.setText(Func.getNextID("VegiID", "vegi", "V", conn));
+        
+        tableload1();
+    }//GEN-LAST:event_RefreshMouseClicked
+
+    private void RefreshMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RefreshMouseEntered
+        
+        Refresh.setBackground(new Color (0,0,0));
+    }//GEN-LAST:event_RefreshMouseEntered
+
+    private void RefreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RefreshMouseExited
+        Refresh.setBackground(new Color (51,51,51));
+    }//GEN-LAST:event_RefreshMouseExited
+
+    private void SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchMouseClicked
+          String search = jTextField5.getText();
+
+        String sql = "SELECT * FROM vegi WHERE VegiName LIKE '%"+search+"%'";
+
+        try {
+            pst = conn.prepareStatement(sql);
+            rst = pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rst));
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_SearchMouseClicked
 
     /**
      * @param args the command line arguments
@@ -568,12 +674,18 @@ public class Vegitable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ADD;
+    private javax.swing.JPanel Delete;
+    private javax.swing.JPanel Refresh;
+    private javax.swing.JPanel Search;
+    private javax.swing.JPanel Update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -582,12 +694,8 @@ public class Vegitable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
@@ -595,6 +703,5 @@ public class Vegitable extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
