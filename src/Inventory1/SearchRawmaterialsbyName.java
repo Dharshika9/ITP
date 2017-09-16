@@ -43,7 +43,7 @@ public class SearchRawmaterialsbyName extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                invmodel=new RawmaterialsModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"));
+                invmodel=new RawmaterialsModel(rs.getInt("code"), rs.getString("category"), rs.getString("subcategory"), rs.getString("name"), rs.getString("color"), rs.getString("unitmeasure"), rs.getDouble("startinginv"), rs.getDouble("reorder"), rs.getDouble("cost"), rs.getDouble("stockqty"), rs.getString("orderstatus"),rs.getBytes("image"));
                 inventoryList.add(invmodel);
             }
                     

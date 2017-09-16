@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -35,18 +36,53 @@ public class Suppliers extends javax.swing.JFrame {
     PreparedStatement pst1 = null;
     ResultSet rs = null;
     ResultSet rs1 = null;
+     
    
     public Suppliers() {
         initComponents();
         con= dbcon.connect();
+        
+    Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement pst1 = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    fillcombo ();
         showjTable();
     }
     
 
    @SuppressWarnings("unchecked")
+    private void fillcombo ()
+    
+            
+    {
+        try {
+            
+            
+            String sql ="Select * from rawcategory";
+            pst=con.prepareStatement(sql);
+            rs =pst.executeQuery();
+            while(rs.next())
+            
+            {
+                
+                
+                String cat = rs.getNString("rawcategory");
+                cmb_itemcat.addItem(cat);
+            
+            
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
+    
    
-   
-   
+           
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -87,6 +123,7 @@ public class Suppliers extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
         lbl_suppid = new javax.swing.JLabel();
+        lbl_phonealert = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_supplier = new javax.swing.JTable();
 
@@ -169,9 +206,19 @@ public class Suppliers extends javax.swing.JFrame {
 
         txt_email.setBackground(new java.awt.Color(204, 204, 204));
         txt_email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txt_emailMouseExited(evt);
+            }
+        });
 
         txt_website.setBackground(new java.awt.Color(204, 204, 204));
         txt_website.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_website.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_websiteMouseClicked(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Item Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -190,10 +237,14 @@ public class Suppliers extends javax.swing.JFrame {
 
         cmb_itemcat.setBackground(new java.awt.Color(204, 204, 204));
         cmb_itemcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_itemcat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Fabrics", "Buttons", "Elastics", "Zipper" }));
         cmb_itemcat.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmb_itemcatItemStateChanged(evt);
+            }
+        });
+        cmb_itemcat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_itemcatActionPerformed(evt);
             }
         });
 
@@ -202,7 +253,12 @@ public class Suppliers extends javax.swing.JFrame {
 
         cmb_name.setBackground(new java.awt.Color(204, 204, 204));
         cmb_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_name.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmb_name.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "u", "o" }));
+        cmb_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_nameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -334,12 +390,16 @@ public class Suppliers extends javax.swing.JFrame {
         lbl_suppid.setForeground(new java.awt.Color(255, 255, 255));
         lbl_suppid.setText("ID");
 
+        lbl_phonealert.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 24)); // NOI18N
+        lbl_phonealert.setForeground(new java.awt.Color(51, 51, 51));
+        lbl_phonealert.setText("!");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,23 +427,26 @@ public class Suppliers extends javax.swing.JFrame {
                                 .addGap(59, 59, 59)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_website, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_phonealert, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 137, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_insert)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_delete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_update)
-                .addGap(2, 2, 2))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(81, 86, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +461,7 @@ public class Suppliers extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbl_suppid)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_buissname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -409,7 +472,8 @@ public class Suppliers extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txt_contactname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(lbl_phonealert))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -419,28 +483,17 @@ public class Suppliers extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_insert)
-                    .addComponent(btn_delete)
-                    .addComponent(btn_update)))
+                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_insert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTable_supplier.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Bussiness name", "Contact name", "Country", "Category", "Subcategory", "Name", "Address", "Phone", "email", "website", "Accountno", "currency", "notes"
@@ -462,16 +515,16 @@ public class Suppliers extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -489,7 +542,40 @@ public class Suppliers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-      
+     void  loadSubCat(){
+    
+    try {
+             //if(evt.getStateChange() == ItemEvent.SELECTED)
+               // {
+                 //   if(this.cmb_category.getSelectedIndex()>0)
+           //{
+            cmb_itemsubcat.removeAllItems();
+            String sql ="Select * from rawsubcategory where rawcategory ='"+cmb_itemcat.getSelectedItem().toString()+"' ";
+            pst1=con.prepareStatement(sql);
+            rs1 =pst1.executeQuery();
+            while(rs1.next())
+            
+            {
+                
+                
+                String subcat = rs1.getNString("rawsubcategory");
+                cmb_itemsubcat.addItem(subcat);
+               
+            
+            } // }  
+                //}
+            
+        } catch (Exception e) {
+        }
+    
+    
+    }  
+    
+    
+    
+    
+    
+    
     
     
     
@@ -516,59 +602,104 @@ public class Suppliers extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_supplierMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+       
+        
+        int x = JOptionPane.showConfirmDialog(null,"Do you want to add new record?");
+        
+        if(x==0)
+        {
+        
         String query ="UPDATE `suppliers` SET `businessname`='"+txt_buissname.getText()+"',`contactname`='"+txt_contactname.getText()+"',`country`='"+txt_country.getText()+"',`address`='"+txt_address.getText()+"',`phone`='"+txt_phone.getText()+"',`email`='"+txt_email.getText()+"',`website`='"+txt_website.getText()+"',`itemcategory`='"+cmb_itemcat.getSelectedItem()+"',`itemsubcategory`='"+cmb_itemsubcat.getSelectedItem()+"',`itemname`='"+cmb_name.getSelectedItem()+"',`accountno`='"+txt_accountno.getText()+"',`currency`='"+txt_currency.getText()+"',`notes`='"+txt_notes.getText()+"' WHERE `supplierid`='"+lbl_suppid.getText()+"'";
 
         executeSqlQuery(query, "Update");
+        
+        
+          }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+        
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+       
+        
+         int x = JOptionPane.showConfirmDialog(null,"Do you want to add new record?");
+        
+        if(x==0)
+        {
+        
+        
         String query="DELETE FROM `suppliers` WHERE `supplierid`='"+lbl_suppid.getText()+"'";
         executeSqlQuery(query, "Delete");
+        
+        
+        
+          }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
 
+         int x = JOptionPane.showConfirmDialog(null,"Do you want to add new record?");
+        
+        if(x==0)
+        {
+        
+        
+       
+        
         String query="INSERT INTO `suppliers`(`businessname`, `contactname`, `country`, `address`, `phone`, `email`, `website`, `itemcategory`, `itemsubcategory`, `itemname`, `accountno`, `currency`, `notes`)"
         +"VALUES ('"+txt_buissname.getText()+"','"+txt_contactname.getText()+"','"+txt_country.getText()+"','"+txt_address.getText()+"','"+txt_phone.getText()+"','"+txt_email.getText()+"','"+txt_website.getText()+"','"+cmb_itemcat.getSelectedItem()+"','"+cmb_itemsubcat.getSelectedItem()+"','"+cmb_name.getSelectedItem()+"','"+txt_accountno.getText()+"','"+txt_currency.getText()+"','"+txt_notes.getText()+"')";
-        executeSqlQuery(query, "Insert");
+        executeSqlQuery2(query, "Insert");
+        
+          }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void txt_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_phoneActionPerformed
 
     }//GEN-LAST:event_txt_phoneActionPerformed
 
-    public String[] getx(String x)
-    {
-        String[] y = new String[5];
-        if(x.equalsIgnoreCase("Fabrics"))
-        {
-            y[0] = "Shirt Fabric";
-            y[1] = "Trouser fabric";
-            y[2] = "Undergarment fabric";
-            
-        }
-        else if(x.equalsIgnoreCase("Buttons"))
-        {
-            y[0] ="2 hole button";
-            y[1] ="4 hole button";
-            y[2] ="Shank";       
-            
-        }
-        
-        
-        return y;
-    }
+   
     
     
     private void cmb_itemcatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_itemcatItemStateChanged
-           if(evt.getStateChange() == ItemEvent.SELECTED)
-       {
-           if(this.cmb_itemcat.getSelectedIndex()>0)
-           {
-               this.cmb_itemsubcat.setModel(new DefaultComboBoxModel(this.getx(this.cmb_itemcat.getSelectedItem().toString())));
-           }
-       }
+         
     }//GEN-LAST:event_cmb_itemcatItemStateChanged
+
+    private void cmb_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_nameActionPerformed
+
+    private void cmb_itemcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_itemcatActionPerformed
+      loadSubCat();
+    }//GEN-LAST:event_cmb_itemcatActionPerformed
+
+    private void txt_emailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_emailMouseExited
+
+    private void txt_websiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_websiteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_websiteMouseClicked
    
       
     
@@ -662,42 +793,110 @@ public class Suppliers extends javax.swing.JFrame {
          Connection conn= connect();
          Statement st;
          try {
-                st=con.createStatement();
+               
+              {
+               st=con.createStatement();
               
-                Emailvalidator emailValidator = new Emailvalidator();
-                if(emailValidator.validate(txt_email.getText().trim())) {
-                              
+               
+                    
+                  if((st.executeUpdate(query))==1)
+              {
+                  // data get refresh after query runs 
+                  DefaultTableModel model = (DefaultTableModel)jTable_supplier.getModel();
+                  model.setRowCount(0);
+                  showjTable();
+                                    
+                  // message box
+                  JOptionPane.showMessageDialog(null, "Data "+message+" Successfully");
+                  ClearField();
+              }else{
+                  JOptionPane.showMessageDialog(null, "Data "+message+" Failed");
+              }  
+                    
+                    
+                }                          
               
-              
-                            if((st.executeUpdate(query))==1)
-                                {
-                  
-                  
-                                    // data get refresh after query runs 
-                                        DefaultTableModel model = (DefaultTableModel)jTable_supplier.getModel();
-                                        model.setRowCount(0);
-                                        showjTable();
-                  
-                  
-                                    // message box
-                                        JOptionPane.showMessageDialog(null, "Data "+message+" Successfully");
-                                        ClearField();
-                                }
+                                                             
+                                                                            
+                                                                            
+                                
                 
-              } 
-                else if(!emailValidator.validate(txt_email.getText().trim())) {
-                        txt_email.setForeground(new Color(255,0,0));
-                       
-                        JOptionPane.showMessageDialog(null, "Data "+message+" Failed");
-                        txt_email.setText(null);
-                        
-                }
+                                 
+               
+                
          } catch (Exception e) {
              JOptionPane.showMessageDialog(null, e);
          }
      
      }
    
+    
+     public void executeSqlQuery2(String query,String message)
+     {
+         Connection conn= connect();
+         Statement st;
+         try {
+               
+                    
+                            st=con.createStatement();
+                           
+              
+                            Emailvalidator emailValidator = new Emailvalidator();
+               
+                            if(emailValidator.validate(txt_email.getText().trim()) )
+                                         
+                                        {
+                    
+                                                    if((st.executeUpdate(query))==1)
+                                                                     {
+                 
+                                                                        DefaultTableModel model = (DefaultTableModel)jTable_supplier.getModel();
+                                                                        model.setRowCount(0);
+                                                                        showjTable();
+                                    
+                  
+                                                                         JOptionPane.showMessageDialog(null, "Data "+message+" Successfully");
+                                                                          ClearField();
+                  
+                  
+                                                                        }
+              
+                                        }
+                
+                
+                            else{
+                                       if(!emailValidator.validate(txt_email.getText().trim()) )
+                
+                
+                                        {
+                                            if(!emailValidator.validate(txt_email.getText().trim()))
+                                            {
+                                            
+                                            
+                                                                    lbl_phonealert.setForeground(new Color(255,0,0));
+                                                                    txt_email.setForeground(new Color(255,0,0));
+                                            
+                                            }  
+                                        
+                                        
+                                            
+                                      JOptionPane.showMessageDialog(null, "Data "+message+" Failed");                        
+              
+                                                             
+                                        }                                              
+                                                                            
+                             
+                
+                       }     
+               
+                
+         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e);
+         }
+     
+     }
+    
+    
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -736,6 +935,7 @@ public class Suppliers extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_supplier;
+    private javax.swing.JLabel lbl_phonealert;
     private javax.swing.JLabel lbl_suppid;
     private javax.swing.JTextField txt_accountno;
     private javax.swing.JTextField txt_address;

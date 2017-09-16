@@ -271,16 +271,12 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Select"/>
-                    <StringItem index="1" value="Formal Shirt"/>
-                    <StringItem index="2" value="Formal Trouser"/>
-                    <StringItem index="3" value="Brief"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmb_productcategoryItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmb_productcategoryActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -314,13 +310,12 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
-                    <StringItem index="0" value="Select"/>
-                    <StringItem index="1" value="S"/>
-                    <StringItem index="2" value="L"/>
-                    <StringItem index="3" value="XL"/>
+                  <StringArray count="5">
+                    <StringItem index="0" value="S"/>
+                    <StringItem index="1" value="L"/>
+                    <StringItem index="2" value="XL"/>
+                    <StringItem index="3" value="XXL"/>
                     <StringItem index="4" value="XXL"/>
-                    <StringItem index="5" value="XXL"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -337,9 +332,8 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Select"/>
-                    <StringItem index="1" value="Blue"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="Blue"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -367,9 +361,8 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Select"/>
-                    <StringItem index="1" value="Package"/>
+                  <StringArray count="1">
+                    <StringItem index="0" value="Package"/>
                   </StringArray>
                 </Property>
               </Properties>

@@ -61,6 +61,8 @@ public class Purchases extends javax.swing.JFrame {
         txt_rawcode = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         txt_orderstatus = new javax.swing.JTextField();
+        txt_reorder = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -87,8 +89,6 @@ public class Purchases extends javax.swing.JFrame {
         txt_costperunit2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel20 = new javax.swing.JLabel();
-        txt_status = new javax.swing.JTextField();
         date_orderdate = new com.toedter.calendar.JDateChooser();
         date_expectdate = new com.toedter.calendar.JDateChooser();
 
@@ -133,6 +133,11 @@ public class Purchases extends javax.swing.JFrame {
 
         txt_available.setBackground(new java.awt.Color(204, 204, 204));
         txt_available.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_available.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_availableActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,6 +159,12 @@ public class Purchases extends javax.swing.JFrame {
 
         txt_orderstatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txt_reorder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Re order Level");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -172,9 +183,11 @@ public class Purchases extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel16)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel21))
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel15))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_reorder)
                     .addComponent(txt_orderstatus)
                     .addComponent(txt_unitmeasure)
                     .addComponent(txt_available)
@@ -197,30 +210,31 @@ public class Purchases extends javax.swing.JFrame {
                         .addComponent(cmb_rawnamesearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txt_available, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_unitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_reorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(txt_orderstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
+                .addGap(21, 21, 21))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Purchase", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Purchase Order No");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 49, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Raw Material Name");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 78, -1, -1));
 
         txt_rawnamesearch2.setBackground(new java.awt.Color(204, 204, 204));
         txt_rawnamesearch2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -229,32 +243,26 @@ public class Purchases extends javax.swing.JFrame {
                 txt_rawnamesearch2KeyReleased(evt);
             }
         });
-        jPanel3.add(txt_rawnamesearch2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 72, 204, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Units of Measure");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 179, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Quantity");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 247, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Supplier ID");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 140, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Order Date");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 179, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Expected Date");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 213, -1, -1));
 
         txt_qty.setBackground(new java.awt.Color(204, 204, 204));
         txt_qty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -263,33 +271,26 @@ public class Purchases extends javax.swing.JFrame {
                 txt_qtyKeyReleased(evt);
             }
         });
-        jPanel3.add(txt_qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 244, 204, -1));
 
         txt_suppid.setBackground(new java.awt.Color(204, 204, 204));
         txt_suppid.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(txt_suppid, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 141, 204, -1));
 
         txt_totalcost.setBackground(new java.awt.Color(204, 204, 204));
         txt_totalcost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel3.add(txt_totalcost, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 244, 204, 39));
 
         txt_unitmeasure2.setBackground(new java.awt.Color(204, 204, 204));
         txt_unitmeasure2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(txt_unitmeasure2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 176, 204, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Raw Material Code");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 25));
 
         txt_rawcode2.setBackground(new java.awt.Color(204, 204, 204));
         txt_rawcode2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(txt_rawcode2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 141, 204, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Supplier Name");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 75, -1, -1));
 
         txt_suppname.setBackground(new java.awt.Color(204, 204, 204));
         txt_suppname.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -298,17 +299,14 @@ public class Purchases extends javax.swing.JFrame {
                 txt_suppnameKeyReleased(evt);
             }
         });
-        jPanel3.add(txt_suppname, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 66, 204, -1));
 
         lbl_purchaseorderno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbl_purchaseorderno.setForeground(new java.awt.Color(255, 255, 255));
         lbl_purchaseorderno.setText("No");
-        jPanel3.add(lbl_purchaseorderno, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 49, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Select");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 109, -1, -1));
 
         cmb_rawnamesearch2.setBackground(new java.awt.Color(204, 204, 204));
         cmb_rawnamesearch2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -322,7 +320,6 @@ public class Purchases extends javax.swing.JFrame {
                 cmb_rawnamesearch2ActionPerformed(evt);
             }
         });
-        jPanel3.add(cmb_rawnamesearch2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 106, 204, -1));
 
         cmb_suppnameselect.setBackground(new java.awt.Color(204, 204, 204));
         cmb_suppnameselect.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -336,26 +333,21 @@ public class Purchases extends javax.swing.JFrame {
                 cmb_suppnameselectActionPerformed(evt);
             }
         });
-        jPanel3.add(cmb_suppnameselect, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 106, 204, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Select");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 106, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("cost/unit");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 213, -1, -1));
 
         txt_costperunit2.setBackground(new java.awt.Color(204, 204, 204));
         txt_costperunit2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(txt_costperunit2, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 210, 204, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Total Cost");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 247, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Purchase");
@@ -364,17 +356,136 @@ public class Purchases extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(771, 313, 111, 34));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Status");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 294, -1, -1));
-
-        txt_status.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel3.add(txt_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 294, 115, -1));
-        jPanel3.add(date_orderdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 176, 204, -1));
-        jPanel3.add(date_expectdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 210, 204, -1));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(43, 43, 43)
+                        .addComponent(lbl_purchaseorderno))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(45, 45, 45)
+                        .addComponent(txt_rawnamesearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1)
+                        .addGap(87, 87, 87)
+                        .addComponent(txt_suppname, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(123, 123, 123)
+                        .addComponent(cmb_rawnamesearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel18)
+                        .addGap(138, 138, 138)
+                        .addComponent(cmb_suppnameselect, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(48, 48, 48)
+                        .addComponent(txt_rawcode2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel9)
+                        .addGap(108, 108, 108)
+                        .addComponent(txt_suppid, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(59, 59, 59)
+                        .addComponent(txt_unitmeasure2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel10)
+                        .addGap(106, 106, 106)
+                        .addComponent(date_orderdate, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(105, 105, 105)
+                        .addComponent(txt_costperunit2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel11)
+                        .addGap(83, 83, 83)
+                        .addComponent(date_expectdate, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(106, 106, 106)
+                        .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(89, 89, 89)
+                        .addComponent(txt_totalcost, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(356, 356, 356)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(lbl_purchaseorderno))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(txt_rawnamesearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel1))
+                    .addComponent(txt_suppname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel17))
+                    .addComponent(cmb_rawnamesearch2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(cmb_suppnameselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_rawcode2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_suppid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_unitmeasure2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date_orderdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10))))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_costperunit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date_expectdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel11))))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel8))
+                    .addComponent(txt_qty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(txt_totalcost, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -385,7 +496,7 @@ public class Purchases extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +516,7 @@ public class Purchases extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
         );
 
         pack();
@@ -447,16 +558,19 @@ public class Purchases extends javax.swing.JFrame {
     private void cmb_rawnamesearchItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_rawnamesearchItemStateChanged
          if(evt.getStateChange() ==java.awt.event.ItemEvent.SELECTED) {
              String name = (String) cmb_rawnamesearch.getSelectedItem();
+             
+             
                     try{
 
-                            String sql = "SELECT * FROM rawmaterials WHERE name='"+name+"'";
+                            String sql = "SELECT * FROM rawmaterials WHERE name='"+name+"'" ;
                             Connection connection = connect();	
                             Statement st = connection.createStatement();
                             ResultSet rs = st.executeQuery(sql);
                             String stockqty = "";
                             String code="";
                             String unitmeasure="";
-                             String orderstatus = "";
+                            String reorder="";
+                            
                                             
 
                             while(rs.next()){
@@ -464,13 +578,31 @@ public class Purchases extends javax.swing.JFrame {
                                                 stockqty = rs.getString("stockqty");
                                                 code = rs.getString("code");
                                                 unitmeasure = rs.getString("unitmeasure");
-                                                orderstatus = rs.getString("orderstatus");
+                                                reorder=rs.getString("reorder");
+                                               
                                             
                                             }
                     txt_available.setText(stockqty);
                     txt_rawcode.setText(code);
                     txt_unitmeasure.setText(unitmeasure);
-                    txt_orderstatus.setText(orderstatus); 
+                    txt_reorder.setText(reorder);
+                    
+                    Double av = Double.parseDouble(txt_available.getText());
+                    Double re = Double.parseDouble(txt_reorder.getText());
+                    
+                    if(av <= re){
+                    
+                   
+                            txt_orderstatus.setText("Yes");
+                                               
+                    }
+                    
+                    
+                    else{
+                            
+                            txt_orderstatus.setText("Yes");
+                    }
+                   
                    }catch(Exception ex){
                                         }
                    
@@ -652,9 +784,9 @@ public class Purchases extends javax.swing.JFrame {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                      
                                                                                                  
-                     String query="INSERT INTO `supplierpurchases`(`rawmaterialname`,`rawmaterialcode`,`unitsofmeasure`,`cost/unit`,`quantity`,`businessname`,`supplierid`,`totalcost`,`expecteddate`)"
+                     String query="INSERT INTO `supplierpurchases`(`rawmaterialname`,`rawmaterialcode`,`unitsofmeasure`,`cost/unit`,`quantity`,`businessname`,`supplierid`,`totalcost`,`expecteddate`,`orderdate`)"
                                + "VALUES ('"+cmb_rawnamesearch2.getSelectedItem()+"','"+txt_rawcode2.getText()+"','"+txt_unitmeasure2.getText()+"','"+txt_costperunit2.getText()+"','"+txt_qty.getText()+"','"+cmb_suppnameselect.getSelectedItem()+"','"+txt_suppid.getText()+"','"+txt_totalcost.getText()+"',"
-                             + "'"+dateFormat.format(date_expectdate.getDate()) +"')";
+                             + "'"+dateFormat.format(date_expectdate.getDate()) +"','"+dateFormat.format(date_orderdate.getDate()) +"')";
        
                     executeSqlQuery(query, "PurchaseOrder");
                     
@@ -742,6 +874,10 @@ public class Purchases extends javax.swing.JFrame {
     private void cmb_suppnameselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_suppnameselectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_suppnameselectActionPerformed
+
+    private void txt_availableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_availableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_availableActionPerformed
     
     
     
@@ -794,12 +930,12 @@ public class Purchases extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -820,7 +956,7 @@ public class Purchases extends javax.swing.JFrame {
     private javax.swing.JTextField txt_rawcode2;
     private javax.swing.JTextField txt_rawnamesearch;
     private javax.swing.JTextField txt_rawnamesearch2;
-    private javax.swing.JTextField txt_status;
+    private javax.swing.JTextField txt_reorder;
     private javax.swing.JTextField txt_suppid;
     private javax.swing.JTextField txt_suppname;
     private javax.swing.JTextField txt_totalcost;

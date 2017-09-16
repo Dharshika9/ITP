@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -23,23 +24,31 @@ import javax.swing.table.TableModel;
  */
 public class SupplierPayments extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SupplierPayments
-     */
-    
+       
     String suppid;
     String suppname;
     String totalcoast;
-     Connection con = null;
+    Connection con = null;
     PreparedStatement pst = null;
     PreparedStatement pst1 = null;
     ResultSet rs = null;
     ResultSet rs1 = null;
+    
+    
     public SupplierPayments() {
-         initComponents();
-         con= dbcon.connect();
+    con= dbcon.connect();
+    Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement pst1 = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
+    initComponents();
+         
          showjTable();
     }
+    
+    
+    
     public SupplierPayments(String y,String z,String xx) {
        
         initComponents();
@@ -123,11 +132,13 @@ public class SupplierPayments extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txt_paytotalamount = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_insert = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        btn_update = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_payid = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtable_payment = new javax.swing.JTable();
+        tbl_payment = new javax.swing.JTable();
 
         jButton4.setText("jButton4");
 
@@ -223,16 +234,37 @@ public class SupplierPayments extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Insert");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_insert.setText("Insert");
+        btn_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_insertActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Delete");
+        btn_delete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Update");
+        btn_update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_update.setText("Update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Payment ID");
+
+        lbl_payid.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbl_payid.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_payid.setText("ID");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -248,45 +280,53 @@ public class SupplierPayments extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jLabel12)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel1))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txt_paybusinessname, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_paysuppid, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_paypurchaseno, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmb_paymenttype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(date_paymentdate, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(txt_paypaidamount, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_paydueamount, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_paytotalamount))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txt_paybusinessname, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_paysuppid, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_paypurchaseno, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmb_paymenttype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(date_paymentdate, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                            .addComponent(txt_paypaidamount, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_paydueamount, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_paytotalamount))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel10))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                    .addComponent(jTextField8)))
-                            .addComponent(jLabel11)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jButton1)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel10))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                                            .addComponent(jTextField8)))
+                                    .addComponent(jLabel11)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lbl_payid))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_payid))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -330,40 +370,29 @@ public class SupplierPayments extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_paydueamount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(btn_insert)
+                            .addComponent(btn_delete)
+                            .addComponent(btn_update))
                         .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jtable_payment.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_payment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Payment ID", "Order No", "Supplier ID", "Supplier Business  Name", "Payment Type", "Payment Date", "Total amount", "Paid amount", "Due Amount"
             }
         ));
-        jtable_payment.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_payment.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtable_paymentMouseClicked(evt);
+                tbl_paymentMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtable_payment);
+        jScrollPane1.setViewportView(tbl_payment);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -374,14 +403,14 @@ public class SupplierPayments extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -444,13 +473,13 @@ public class SupplierPayments extends javax.swing.JFrame {
       public void showjTable()
     {
         ArrayList<Supplierpaymentsemodel> listdata=getSupplierPaymentsList();
-        DefaultTableModel model =(DefaultTableModel)jtable_payment.getModel();
+        DefaultTableModel model =(DefaultTableModel)tbl_payment.getModel();
         
         Object [] row=new Object[9];
         for(int i = 0;i<listdata.size();i++)
         {
-            row[0]=listdata.get(i).getPurchaseorderno();
-            row[1]=listdata.get(i).getPaymentid();
+            row[0]=listdata.get(i).getPaymentid();
+            row[1]=listdata.get(i).getPurchaseorderno();
             row[2]=listdata.get(i).getSupplierid();
             row[3]=listdata.get(i).getBusinessname();
             row[4]=listdata.get(i).getPaymenttype();
@@ -464,59 +493,81 @@ public class SupplierPayments extends javax.swing.JFrame {
         }
     
     }
-   ;
+   
     
     
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
          
-                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                     
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         
+         
          String query="INSERT INTO `supplierpayments`(`purchaseorderno`,`supplierid`,`businessname`,`paymenttype`,`paymentdate`,`totalamount`,`paidamount`,`dueamount`)VALUES ('"+txt_paypurchaseno.getText()+"','"+txt_paysuppid.getText()+"','"+txt_paybusinessname.getText()+"','"+cmb_paymenttype.getSelectedItem()+"','"+dateFormat.format(date_paymentdate.getDate()) +"','"+txt_paytotalamount.getText()+"','"+txt_paypaidamount.getText()+"','"+txt_paydueamount.getText()+"')";
        
-                    executeSqlQuery(query, "Insert");
+         executeSqlQuery(query, "Insert");
                     
 
                     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_insertActionPerformed
 
-    private void jtable_paymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtable_paymentMouseClicked
-        int i=jtable_payment.getSelectedRow();
-        TableModel model=jtable_payment.getModel();
-         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private void tbl_paymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_paymentMouseClicked
+        
+        
+        int i=tbl_payment.getSelectedRow();
+        TableModel model=tbl_payment.getModel();
+        
        
-        txt_paypurchaseno.setText(model.getValueAt(i, 0).toString());
-         txt_paysuppid.setText(model.getValueAt(i, 1).toString());
-        txt_paybusinessname.setText(model.getValueAt(i, 2).toString());
-        cmb_paymenttype.setSelectedItem(model.getValueAt(i, 3).toString());
-        //date_paymentdate.setDate(SimpleDateFormat("yyyy-MM-dd").parse((String)getSupplierPaymentsList().get(i) ));
-         txt_paytotalamount.setText(model.getValueAt(i, 5).toString());
-          txt_paypaidamount.setText(model.getValueAt(i, 6).toString());
-           txt_paydueamount.setText(model.getValueAt(i, 2).toString());
-           
-           
-           
-           
+        try { 
+            
+        lbl_payid.setText(model.getValueAt(i, 0).toString());
+        txt_paypurchaseno.setText(model.getValueAt(i, 1).toString());
+        txt_paysuppid.setText(model.getValueAt(i, 2).toString());
+        txt_paybusinessname.setText(model.getValueAt(i, 3).toString());
+        cmb_paymenttype.setSelectedItem(model.getValueAt(i, 4).toString());
+        date_paymentdate.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(i,5).toString()));
+        txt_paytotalamount.setText(model.getValueAt(i, 6).toString());
+        txt_paypaidamount.setText(model.getValueAt(i, 7).toString());
+        txt_paydueamount.setText(model.getValueAt(i, 8).toString());
+            
+        } catch (Exception e) {
+        }
        
-    }//GEN-LAST:event_jtable_paymentMouseClicked
+        
+        
+        
+        
+      
+       
+    }//GEN-LAST:event_tbl_paymentMouseClicked
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+      String query="DELETE FROM `supplierpayments` WHERE `paymentid`='"+lbl_payid.getText()+"'";
+       executeSqlQuery(query, "Delete");
+        
+                           
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        int x = JOptionPane.showConfirmDialog(null,"Do you want to Update record?");
+        
+        if(x==0)
+        {
+        
+        String query="UPDATE `supplierpayments` SET `paymenttype`='"+cmb_paymenttype.getSelectedItem()+"',`totalamount`='"+txt_paytotalamount.getText()+"',`paidamount`='"+txt_paydueamount.getText()+"',`dueamount`='"+txt_paydueamount.getText()+"'WHERE `paymentid`='"+lbl_payid.getText()+"'";
+        executeSqlQuery(query, "Update");
+        
+        
+        
+         }
+        else if( x==1) {
+                  
+                  ClearField();
+              }
+        
+        
+    }//GEN-LAST:event_btn_updateActionPerformed
  
-    public void ClearField()
-    {
-        
-        txt_paybusinessname.setText(null);
-        cmb_paymenttype.setSelectedItem(null);
-        txt_paydueamount.setText(null);
-        txt_paypaidamount.setText(null);
-        txt_paypurchaseno.setText(null);
-        txt_paysuppid.setText(null);
-        
-        txt_paytotalamount.setText(null);
-        date_paymentdate.setDate(null); 
-   }
-    
-    
-    
-    public void executeSqlQuery(String query,String message)
+     public void executeSqlQuery(String query,String message)
      {
          Connection conn= connect();
          Statement st;
@@ -525,7 +576,7 @@ public class SupplierPayments extends javax.swing.JFrame {
               if((st.executeUpdate(query))==1)
               {
                   // data get refresh after query runs 
-                  DefaultTableModel model = (DefaultTableModel)jtable_payment.getModel();
+                  DefaultTableModel model = (DefaultTableModel)tbl_payment.getModel();
                   model.setRowCount(0);
                   showjTable();
                                     
@@ -541,6 +592,25 @@ public class SupplierPayments extends javax.swing.JFrame {
          }
          
      }
+    
+    
+    
+    public void ClearField()
+    {
+        
+        txt_paybusinessname.setText(null);
+        cmb_paymenttype.setSelectedItem(null);
+        txt_paydueamount.setText(null);
+        txt_paypaidamount.setText(null);
+        txt_paypurchaseno.setText(null);
+        txt_paysuppid.setText(null);
+        txt_paytotalamount.setText(null);
+        date_paymentdate.setDate(null); 
+   }
+    
+    
+    
+   
     /**
      * @param args the command line arguments
      */
@@ -577,13 +647,14 @@ public class SupplierPayments extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_update;
     private javax.swing.JComboBox cmb_paymenttype;
     private com.toedter.calendar.JDateChooser date_paymentdate;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -601,7 +672,8 @@ public class SupplierPayments extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTable jtable_payment;
+    private javax.swing.JLabel lbl_payid;
+    private javax.swing.JTable tbl_payment;
     private javax.swing.JTextField txt_paybusinessname;
     private javax.swing.JTextField txt_paydueamount;
     private javax.swing.JTextField txt_paypaidamount;

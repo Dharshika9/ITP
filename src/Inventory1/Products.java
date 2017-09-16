@@ -30,11 +30,43 @@ public class Products extends javax.swing.JFrame {
     ResultSet rs = null;
     ResultSet rs1 = null;
     public Products() {
+         con= dbcon.connect();
+        Connection con = null;
+    PreparedStatement pst = null;
+    PreparedStatement pst1 = null;
+    ResultSet rs = null;
+    ResultSet rs1 = null;
         initComponents();
-        
+         fillcombo ();
         showjTable();
     }
-
+ private void fillcombo ()
+    
+            
+    {
+        try {
+            
+            
+            String sql ="Select * from procategory";
+            pst=con.prepareStatement(sql);
+            rs =pst.executeQuery();
+            while(rs.next())
+            
+            {
+                
+                
+                String cat = rs.getNString("procategory");
+                cmb_productcategory.addItem(cat);
+            
+            
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,10 +129,14 @@ public class Products extends javax.swing.JFrame {
 
         cmb_productcategory.setBackground(new java.awt.Color(204, 204, 204));
         cmb_productcategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_productcategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Formal Shirt", "Formal Trouser", "Brief" }));
         cmb_productcategory.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmb_productcategoryItemStateChanged(evt);
+            }
+        });
+        cmb_productcategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_productcategoryActionPerformed(evt);
             }
         });
 
@@ -114,11 +150,11 @@ public class Products extends javax.swing.JFrame {
 
         cmb_size.setBackground(new java.awt.Color(204, 204, 204));
         cmb_size.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_size.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "S", "L", "XL", "XXL", "XXL" }));
+        cmb_size.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S", "L", "XL", "XXL", "XXL" }));
 
         cmb_color.setBackground(new java.awt.Color(204, 204, 204));
         cmb_color.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_color.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Blue" }));
+        cmb_color.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue" }));
 
         lbl_procode.setBackground(new java.awt.Color(51, 51, 51));
         lbl_procode.setForeground(new java.awt.Color(51, 51, 51));
@@ -126,7 +162,7 @@ public class Products extends javax.swing.JFrame {
 
         cmb_prounitmeasure.setBackground(new java.awt.Color(204, 204, 204));
         cmb_prounitmeasure.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_prounitmeasure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Package" }));
+        cmb_prounitmeasure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Package" }));
 
         btn_Insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_Insert.setText("Insert");
@@ -282,53 +318,21 @@ public class Products extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     public String[] getx(String x)
-    {
-        String[] y = new String[5];
-        if(x.equalsIgnoreCase("Formal Shirt"))
-        {
-            y[0]="Select";
-            y[1] = "Slim Fit Shirt";
-            y[2] = "Classic Fit Shirt";
-                       
-        }
-         else if(x.equalsIgnoreCase("Formal Trouser"))
-        {
-            y[0]="Select";
-            y[1] = "Pleated Trouser";
-            y[2] = "Flat front Trouser";
-           
-        }
-         else if(x.equalsIgnoreCase("Brief"))
-        {
-            y[0]="Select";
-            y[1] = "Normal Brief";
-            y[2] = "Boxer Brief";
-           
-        }
-        
-        
-        return y;
-    }
-    
+     
+      
     
     
     private void cmb_productcategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_productcategoryItemStateChanged
-       if(evt.getStateChange() == ItemEvent.SELECTED)
-       {
-           if(this.cmb_productcategory.getSelectedIndex()>0)
-           {
-               this.cmb_prosubcategory.setModel(new DefaultComboBoxModel(this.getx(this.cmb_productcategory.getSelectedItem().toString())));
-           }
-       }
+      
     }//GEN-LAST:event_cmb_productcategoryItemStateChanged
 
     private void jTable_proMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_proMouseClicked
          int i=jTable_pro.getSelectedRow();
         TableModel model=jTable_pro.getModel();
-        
+       
         lbl_procode.setText(model.getValueAt(i, 0).toString());
         cmb_productcategory.setSelectedItem(model.getValueAt(i, 1).toString());
+       
         cmb_prosubcategory.setSelectedItem(model.getValueAt(i, 2).toString());
         cmb_size.setSelectedItem(model.getValueAt(i, 3).toString());
         cmb_color.setSelectedItem(model.getValueAt(i, 4).toString());
@@ -355,6 +359,39 @@ public class Products extends javax.swing.JFrame {
     private void cmb_prosubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_prosubcategoryActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmb_prosubcategoryActionPerformed
+
+    void loadSubCat()
+    {
+        try {
+             //if(evt.getStateChange() == ItemEvent.SELECTED)
+               // {
+                 //   if(this.cmb_category.getSelectedIndex()>0)
+           //{
+            cmb_prosubcategory.removeAllItems();
+            String sql ="Select * from prosubcategory where procategory ='"+cmb_productcategory.getSelectedItem().toString()+"' ";
+            pst1=con.prepareStatement(sql);
+            rs1 =pst1.executeQuery();
+            while(rs1.next())
+            
+            {
+                
+                
+                String subcat = rs1.getNString("prosubcategory");
+                cmb_prosubcategory.addItem(subcat);
+                
+            
+            } // }  
+                //}
+            
+        } catch (Exception e) {
+        }
+    }
+    private void cmb_productcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_productcategoryActionPerformed
+
+
+        loadSubCat();
+        
+    }//GEN-LAST:event_cmb_productcategoryActionPerformed
 
     
      public ArrayList<ProductsModel> getProductsList()

@@ -112,7 +112,16 @@ public class Supplierpaymentsemodel {
     /**
      * @return the paymentdate
      */
-   
+    public Date getPaymentdate() {
+        return paymentdate;
+    }
+
+    /**
+     * @param paymentdate the paymentdate to set
+     */
+    public void setPaymentdate(Date paymentdate) {
+        this.paymentdate = paymentdate;
+    }
 
     /**
      * @return the totalamount
@@ -156,10 +165,5 @@ public class Supplierpaymentsemodel {
         this.dueamount = dueamount;
     }
 
-    /**
-     * @return the paymentdate
-     */
-    public Date getPaymentdate() {
-        return paymentdate;
-    }
+   
 }
