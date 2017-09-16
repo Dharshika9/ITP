@@ -49,6 +49,7 @@ public class Suppliers extends javax.swing.JFrame {
     ResultSet rs1 = null;
     fillcombo ();
         showjTable();
+        loaditemname();
     }
     
 
@@ -81,7 +82,33 @@ public class Suppliers extends javax.swing.JFrame {
         
     }
     
-   
+   void loaditemname(){
+
+    try {
+             //if(evt.getStateChange() == ItemEvent.SELECTED)
+               // {
+                 //   if(this.cmb_category.getSelectedIndex()>0)
+           //{
+            cmb_name.removeAllItems();
+            String sql ="Select * from rawmaterials";
+            pst1=con.prepareStatement(sql);
+            rs1 =pst1.executeQuery();
+            while(rs1.next())
+            
+            {
+                
+                
+                String subcat = rs1.getNString("name");
+                cmb_name.addItem(subcat);
+               
+            
+            } // }  
+                //}
+            
+        } catch (Exception e) {
+        }
+    
+}
            
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -250,10 +277,14 @@ public class Suppliers extends javax.swing.JFrame {
 
         cmb_itemsubcat.setBackground(new java.awt.Color(204, 204, 204));
         cmb_itemsubcat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmb_itemsubcat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_itemsubcatActionPerformed(evt);
+            }
+        });
 
         cmb_name.setBackground(new java.awt.Color(204, 204, 204));
         cmb_name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_name.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "u", "o" }));
         cmb_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_nameActionPerformed(evt);
@@ -572,6 +603,8 @@ public class Suppliers extends javax.swing.JFrame {
     }  
     
     
+   
+    
     
     
     
@@ -700,6 +733,10 @@ public class Suppliers extends javax.swing.JFrame {
     private void txt_websiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_websiteMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_websiteMouseClicked
+
+    private void cmb_itemsubcatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_itemsubcatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmb_itemsubcatActionPerformed
    
       
     
