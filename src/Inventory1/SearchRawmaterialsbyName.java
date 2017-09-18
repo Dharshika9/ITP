@@ -31,7 +31,7 @@ public class SearchRawmaterialsbyName extends javax.swing.JFrame {
     {
         ArrayList<RawmaterialsModel> inventoryList=new ArrayList<>();
         Connection connection = connect();
-        String query="Select * from rawmaterials WHERE name LIKE '%"+txt_search.getText()+"%'";
+        String query="Select * from rawmaterials WHERE category LIKE '%"+txt_search.getText()+"%'";
         
         Statement st;
         ResultSet rs;

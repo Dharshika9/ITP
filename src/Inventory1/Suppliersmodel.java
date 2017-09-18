@@ -21,9 +21,9 @@ public class Suppliersmodel {
     private String website;
     private String itemcategory;
     private String itemsubcategory;
-    private String itemname;
+    
     private String accountno;
-    private String currency;
+   
     private String notes;
     
     public Suppliersmodel(int Supplierid,
@@ -36,9 +36,9 @@ public class Suppliersmodel {
      String Website,
      String Itemcategory,
      String Itemsubcategory,
-     String Itemname,
+    
      String Accountno,
-     String Currency,
+     
      String Notes
     )
      {
@@ -54,9 +54,9 @@ public class Suppliersmodel {
      this. website=Website;
      this. itemcategory=Itemcategory;
      this. itemsubcategory=Itemsubcategory;
-     this. itemname=Itemname;
+     
      this. accountno=Accountno;
-     this. currency=Currency;
+    
      this. notes=Notes;
     
     
@@ -205,16 +205,7 @@ public class Suppliersmodel {
     /**
      * @return the itemname
      */
-    public String getItemname() {
-        return itemname;
-    }
-
-    /**
-     * @param itemname the itemname to set
-     */
-    public void setItemname(String itemname) {
-        this.itemname = itemname;
-    }
+ 
 
     /**
      * @return the accountno
@@ -233,17 +224,7 @@ public class Suppliersmodel {
     /**
      * @return the currency
      */
-    public String getCurrency() {
-        return currency;
-    }
-
-    /**
-     * @param currency the currency to set
-     */
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
+  
     /**
      * @return the notes
      */

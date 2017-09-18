@@ -10,7 +10,7 @@ package Inventory1;
  * @author Dharshika
  */
 public class ProductsModel {
-    private int procode;
+    private String procode;
     private String procategory;
     private String prosubcategory;
     private String size;
@@ -21,7 +21,7 @@ public class ProductsModel {
     
     
     
-    public ProductsModel(int Procode, String Procategory, String Prosubcategory, String Size, String Color, String Prounitmeasure, double Procostunit)
+    public ProductsModel(String Procode, String Procategory, String Prosubcategory, String Size, String Color, String Prounitmeasure, double Procostunit)
     {
         this.procode=Procode;
         this.procategory=Procategory;
@@ -33,12 +33,12 @@ public class ProductsModel {
     
     }
     
-    public int getProcode() {
+    public String getProcode() {
         return procode;
     }
 
     
-    public void setProcode(int code) {
+    public void setProcode(String code) {
         this.procode = code;
     }
 

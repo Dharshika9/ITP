@@ -90,10 +90,12 @@ public class Products extends javax.swing.JFrame {
         btn_Insert = new javax.swing.JButton();
         btn_Update = new javax.swing.JButton();
         btn_Delete = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_pro = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -154,7 +156,7 @@ public class Products extends javax.swing.JFrame {
 
         cmb_color.setBackground(new java.awt.Color(204, 204, 204));
         cmb_color.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_color.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue" }));
+        cmb_color.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blue", "Black", "Grey", "White", "Brown" }));
 
         lbl_procode.setBackground(new java.awt.Color(51, 51, 51));
         lbl_procode.setForeground(new java.awt.Color(51, 51, 51));
@@ -162,10 +164,11 @@ public class Products extends javax.swing.JFrame {
 
         cmb_prounitmeasure.setBackground(new java.awt.Color(204, 204, 204));
         cmb_prounitmeasure.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cmb_prounitmeasure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Package" }));
+        cmb_prounitmeasure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single Unit" }));
 
         btn_Insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_Insert.setText("Insert");
+        btn_Insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventory1/07_plus-16.png"))); // NOI18N
+        btn_Insert.setText("Add");
         btn_Insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_InsertActionPerformed(evt);
@@ -173,6 +176,7 @@ public class Products extends javax.swing.JFrame {
         });
 
         btn_Update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventory1/012_restart-16.png"))); // NOI18N
         btn_Update.setText("Update");
         btn_Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,12 +185,17 @@ public class Products extends javax.swing.JFrame {
         });
 
         btn_Delete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventory1/010_x-16.png"))); // NOI18N
         btn_Delete.setText("Delete");
         btn_Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_DeleteActionPerformed(evt);
             }
         });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Rs");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -202,39 +211,42 @@ public class Products extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
                 .addGap(62, 62, 62)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmb_prounitmeasure, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmb_productcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmb_prosubcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmb_productcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(486, 486, 486)
                         .addComponent(lbl_procode))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_procost, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(176, 176, 176)
-                        .addComponent(btn_Insert)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_Delete)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Insert, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_Update))
-                    .addComponent(cmb_color, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Delete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74))
+                    .addComponent(cmb_color, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_prosubcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_size, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(lbl_procode))
-                    .addComponent(cmb_productcategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(lbl_procode))
+                            .addComponent(cmb_productcategory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -260,12 +272,16 @@ public class Products extends javax.swing.JFrame {
                                 .addComponent(jLabel6))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_procost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 32, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_Insert)
-                        .addComponent(btn_Delete)
-                        .addComponent(btn_Update)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_procost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_Insert)
+                            .addComponent(btn_Delete)
+                            .addComponent(btn_Update))))
                 .addContainerGap())
         );
 
@@ -293,7 +309,7 @@ public class Products extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 943, Short.MAX_VALUE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +318,7 @@ public class Products extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,7 +358,20 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_proMouseClicked
 
     private void btn_InsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InsertActionPerformed
-         String query="INSERT INTO `products`(`procategory`, `prosubcategory`, `size`, `color`, `prounitmeasure`,`procostperunit`) " + "VALUES ('"+cmb_productcategory.getSelectedItem()+"','"+cmb_prosubcategory.getSelectedItem()+"','"+cmb_size.getSelectedItem()+"','"+cmb_color.getSelectedItem()+"','"+cmb_prounitmeasure.getSelectedItem()+"','"+txt_procost.getText()+"')";
+       
+        String category =(String)cmb_productcategory.getSelectedItem();
+        String subcategory=(String)cmb_prosubcategory.getSelectedItem();
+        String size=(String)cmb_size.getSelectedItem();
+        String color =(String)cmb_color.getSelectedItem();
+        
+        
+        String catfirstletter =category.length()<1?category:category.substring(0,1);
+        String subcatfirstletter =subcategory.length()<1?subcategory:subcategory.substring(0,1);
+           
+        
+        
+        
+        String query="INSERT INTO `products`(`procode`,`procategory`, `prosubcategory`, `size`, `color`, `prounitmeasure`,`procostperunit`) " + "VALUES ('"+catfirstletter+" "+subcatfirstletter+" "+size+" "+color+"','"+cmb_productcategory.getSelectedItem()+"','"+cmb_prosubcategory.getSelectedItem()+"','"+cmb_size.getSelectedItem()+"','"+cmb_color.getSelectedItem()+"','"+cmb_prounitmeasure.getSelectedItem()+"','"+txt_procost.getText()+"')";
         executeSqlQuery(query, "Insert");
     }//GEN-LAST:event_btn_InsertActionPerformed
 
@@ -394,6 +423,10 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_cmb_productcategoryActionPerformed
 
     
+   
+    
+    
+    
      public ArrayList<ProductsModel> getProductsList()
     {
         ArrayList<ProductsModel> productslist=new ArrayList<>();
@@ -410,7 +443,9 @@ public class Products extends javax.swing.JFrame {
             
             while(rs.next())
             {
-                promodel=new ProductsModel(rs.getInt("procode"), rs.getString("procategory"), rs.getString("prosubcategory"), rs.getString("size"), rs.getString("color"), rs.getString("prounitmeasure"), rs.getDouble("procostperunit"));
+                
+                
+                promodel=new ProductsModel(rs.getString("procode"), rs.getString("procategory"), rs.getString("prosubcategory"), rs.getString("size"), rs.getString("color"), rs.getString("prounitmeasure"), rs.getDouble("procostperunit"));
                 productslist.add(promodel);
             }
                     
@@ -473,7 +508,7 @@ public class Products extends javax.swing.JFrame {
                   JOptionPane.showMessageDialog(null, "Data "+message+" Failed");
               }
          } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, e);
+             JOptionPane.showMessageDialog(null,"Product Details already added !" );
          }
      
      }
@@ -508,6 +543,7 @@ public class Products extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
